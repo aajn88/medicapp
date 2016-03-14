@@ -1,0 +1,109 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Base.AppTheme"/>
+
+    <!-- Base application theme. -->
+    <style name="Base.AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="TextViewStyle">
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="ImageViewStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:scaleType">centerCrop</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingLeft">4dp</item>
+        <item name="android:paddingRight">4dp</item>
+        <item name="android:cropToPadding">true</item>
+    </style>
+
+    <!-- Ripple related styles -->
+    <style name="RippleStyle">
+        <item name="rippleOverlay">true</item>
+        <!--<item name="rippleColor">@color/material_grey_300</item>-->
+        <item name="rippleAlpha">0.2</item>
+        <item name="rippleDimension">45dp</item>
+        <item name="rippleHover">true</item>
+        <item name="rippleDuration">200</item>
+        <item name="rippleFadeDuration">50</item>
+        <item name="rippleBackground">@android:color/transparent</item>
+        <item name="rippleDelayClick">true</item>
+        <item name="ripplePersistent">false</item>
+        <item name="rippleInAdapter">false</item>
+    </style>
+
+    <!-- Roboto Styles  -->
+
+    <style name="Display4Style" parent="TextViewStyle">
+        <item name="android:textSize">112sp</item>
+        <item name="typeface">robotoLight</item>
+    </style>
+
+    <style name="Display3Style" parent="TextViewStyle">
+        <item name="android:textSize">56sp</item>
+        <item name="typeface">robotoRegular</item>
+    </style>
+
+    <style name="Display2Style" parent="TextViewStyle">
+        <item name="android:textSize">45sp</item>
+        <item name="typeface">robotoRegular</item>
+    </style>
+
+    <style name="Display1Style" parent="TextViewStyle">
+        <item name="android:textSize">34sp</item>
+        <item name="typeface">robotoRegular</item>
+    </style>
+
+    <style name="HeadlineStyle" parent="TextViewStyle">
+        <item name="android:textSize">24sp</item>
+        <item name="typeface">robotoRegular</item>
+    </style>
+
+    <style name="TitleStyle" parent="TextViewStyle">
+        <item name="android:textSize">20sp</item>
+        <item name="typeface">robotoMedium</item>
+    </style>
+
+    <style name="SubheadingStyle" parent="TextViewStyle">
+        <item name="android:textSize">16sp</item>
+        <item name="typeface">robotoRegular</item>
+    </style>
+
+    <style name="Body2Style" parent="TextViewStyle">
+        <item name="android:textSize">14sp</item>
+        <item name="typeface">robotoMedium</item>
+    </style>
+
+    <style name="Body1Style" parent="TextViewStyle">
+        <item name="android:textSize">14sp</item>
+        <item name="typeface">robotoRegular</item>
+    </style>
+
+    <style name="CaptionStyle" parent="TextViewStyle">
+        <item name="android:textSize">12sp</item>
+        <item name="typeface">robotoRegular</item>
+    </style>
+
+    <style name="ButtonTextStyle" parent="TextViewStyle">
+        <item name="android:textSize">14sp</item>
+        <item name="typeface">robotoMedium</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <style name="StyledDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/material_grey_500</item>
+    </style>
+
+</resources>

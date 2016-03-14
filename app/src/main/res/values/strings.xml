@@ -1,0 +1,12 @@
+<resources>
+
+    <!-- Medicapp Generics -->
+    <string name="app_name">Medicapp</string>
+    <string name="keep_login">Keep me log in</string>
+    <string name="login">Log in</string>
+    <string name="create_account">Create account</string>
+
+    <!-- Transitions Strings -->
+    <string name="transition_body">transition_body</string>
+
+</resources>
