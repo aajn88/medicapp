@@ -4,9 +4,23 @@
     <string name="app_name">Medicapp</string>
     <string name="keep_login">Keep me log in</string>
     <string name="login">Log in</string>
+    <string name="connection_error">A connection error has occurred</string>
+
+    <!-- Create Account -->
     <string name="create_account">Create account</string>
+    <string name="name">Name</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="error_name">Please, write your name</string>
+    <string name="error_username">Please, write a username with at least 4 letters</string>
+    <string name="error_username_exists">The username already exists</string>
+    <string name="error_password">Please, write a password with at least 6 letters</string>
+    <string name="error_passwords_not_match">The passwords do not match</string>
+    <string name="account_created">The account was created</string>
 
     <!-- Transitions Strings -->
     <string name="transition_body">transition_body</string>
+    <string name="transition_text">transition_text</string>
 
 </resources>

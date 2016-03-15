@@ -27,15 +27,14 @@ import roboguice.inject.InjectView;
 @ContentView(R.layout.activity_main)
 public class MainActivity extends RoboActionBarActivity {
 
+    /** Constant for animations duration **/
+    private static final int ANIM_DURATION = 1000;
+    /** Delay for the splash view **/
+    private static final int SPLASH_DELAY = 2500;
+
     static {
         RoboGuice.setUseAnnotationDatabases(false);
     }
-
-    /** Constant for animations duration **/
-    private static final int ANIM_DURATION = 1000;
-
-    /** Delay for the splash view **/
-    private static final int SPLASH_DELAY = 2500;
 
     /** The Medicapp Logo ImageView **/
     @InjectView(R.id.medicapp_logo_iv)

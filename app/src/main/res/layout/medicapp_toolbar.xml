@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar
+    android:id="@+id/toolbar"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="?attr/colorPrimary"
+    app:popupTheme="@style/AppTheme.PopupOverlay">
+
+    <ImageView
+        android:id="@+id/apmospheric_logo_iv"
+        android:layout_width="?attr/actionBarSize"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_medicapp"
+        android:transitionName="@string/transition_body"/>
+
+    <com.crossover.medicapp.custom_views.common.MaterialRippleLayout
+        style="@style/RippleStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right">
+
+        <com.crossover.medicapp.custom_views.font.MaterialDesignIconsTextView
+            android:id="@+id/fst_action_mditv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0.87"
+            android:padding="16dp"
+            android:text="@string/material_icon_check"
+            android:textColor="@color/icons"
+            android:textSize="24dp"/>
+    </com.crossover.medicapp.custom_views.common.MaterialRippleLayout>
+
+    <com.crossover.medicapp.custom_views.common.MaterialRippleLayout
+        style="@style/RippleStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right">
+
+        <com.crossover.medicapp.custom_views.font.MaterialDesignIconsTextView
+            android:id="@+id/snd_action_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0.87"
+            android:padding="16dp"
+            android:text="@string/material_icon_check"
+            android:textColor="@color/icons"
+            android:textSize="24dp"/>
+    </com.crossover.medicapp.custom_views.common.MaterialRippleLayout>
+
+</android.support.v7.widget.Toolbar>

@@ -1,5 +1,9 @@
 package com.crossover.business.config;
 
+import com.crossover.business.services.api.ISessionService;
+import com.crossover.business.services.impl.SessionService;
+import com.crossover.persistence.managers.api.IUsersManager;
+import com.crossover.persistence.managers.impl.UsersManager;
 import com.google.inject.AbstractModule;
 
 /**
@@ -12,23 +16,22 @@ public class ConfigurationModule extends AbstractModule {
 
     @Override
     protected void configure() {
-
         bindServices();
-
+        bindManagers();
     }
 
     /**
      * This method binds all the exposed services
      */
     private void bindServices() {
-
+        bind(ISessionService.class).to(SessionService.class);
     }
 
     /**
      * This method binds all the exposed managers
      */
     private void bindManagers() {
-
+        bind(IUsersManager.class).to(UsersManager.class);
     }
 
 }

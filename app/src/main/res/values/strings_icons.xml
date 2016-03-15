@@ -40,6 +40,7 @@
 
     <!-- Material Design Icons -->
     <string name="material_icon_account">&#xe800;</string>
+    <string name="material_icon_account_key">&#xe8d7;</string>
     <string name="material_icon_account_multiple">&#xe8dc;</string>
     <string name="material_icon_arrow_left">&#xe8f9;</string>
     <string name="material_icon_bookmark">&#xe921;</string>
@@ -100,6 +101,7 @@
     <string name="material_icon_settings">&#xeabe;</string>
     <string name="material_icon_state">&#xeb62;</string>
     <string name="material_icon_store">&#xeae3;</string>
+    <string name="material_icon_tag_text_outline">&#xeaf4;</string>
     <string name="material_icon_to_left">&#xe876;</string>
     <string name="material_icon_video">&#xeb39;</string>
     <string name="material_icon_undo">&#xeb2c;</string>

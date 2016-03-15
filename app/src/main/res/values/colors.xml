@@ -4,8 +4,13 @@
     <color name="white">#ffffff</color>
     <color name="white_15_percent">#26ffffff</color>
     <color name="white_30_percent">#4Dffffff</color>
+    <color name="white_70_percent">#B3ffffff</color>
 
     <color name="black">#000000</color>
+    <color name="black_12_percent">#1F000000</color>
+    <color name="black_26_percent">#43000000</color>
+    <color name="black_38_percent">#61000000</color>
+    <color name="black_54_percent">#8A000000</color>
 
     <color name="colorPrimary">@color/main_color_500</color>
     <color name="colorPrimaryDark">@color/main_color_500</color>

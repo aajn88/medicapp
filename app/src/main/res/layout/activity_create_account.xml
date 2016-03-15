@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".controllers.create_account.CreateAccountActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <include layout="@layout/medicapp_toolbar"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/app_bar_layout">
+
+        <LinearLayout
+            android:id="@+id/create_account_ll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="16dp">
+
+            <RelativeLayout
+                android:id="@+id/competencia_rl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.crossover.medicapp.custom_views.font.MaterialDesignIconsTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_centerVertical="true"
+                    android:alpha="0.38"
+                    android:gravity="center"
+                    android:paddingLeft="16dp"
+                    android:text="@string/material_icon_account_key"
+                    android:textColor="@color/black"
+                    android:textSize="24dp"/>
+
+                <Spinner
+                    android:id="@+id/roles_sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="72dp"
+                    android:layout_marginRight="16dp"
+                    android:orientation="vertical"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.crossover.medicapp.custom_views.font.MaterialDesignIconsTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_centerVertical="true"
+                    android:alpha="0.38"
+                    android:gravity="center"
+                    android:paddingLeft="16dp"
+                    android:text="@string/material_icon_tag_text_outline"
+                    android:textColor="@color/black"
+                    android:textSize="24dp"/>
+
+                <EditText
+                    android:id="@+id/user_name_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="72dp"
+                    android:layout_marginRight="16dp"
+                    android:hint="@string/name"
+                    android:singleLine="true"
+                    android:textColorHint="@color/black_54_percent"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.crossover.medicapp.custom_views.font.MaterialDesignIconsTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_centerVertical="true"
+                    android:alpha="0.38"
+                    android:gravity="center"
+                    android:paddingLeft="16dp"
+                    android:text="@string/material_icon_account"
+                    android:textColor="@color/black"
+                    android:textSize="24dp"/>
+
+                <EditText
+                    android:id="@+id/username_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="72dp"
+                    android:layout_marginRight="16dp"
+                    android:hint="@string/username"
+                    android:singleLine="true"
+                    android:textColorHint="@color/black_54_percent"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.crossover.medicapp.custom_views.font.MaterialDesignIconsTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_centerVertical="true"
+                    android:alpha="0.38"
+                    android:gravity="center"
+                    android:paddingLeft="16dp"
+                    android:text="@string/material_icon_password"
+                    android:textColor="@color/black"
+                    android:textSize="24dp"/>
+
+                <EditText
+                    android:id="@+id/password_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="72dp"
+                    android:layout_marginRight="16dp"
+                    android:hint="@string/password"
+                    android:inputType="numberPassword"
+                    android:singleLine="true"
+                    android:textColorHint="@color/black_54_percent"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.crossover.medicapp.custom_views.font.MaterialDesignIconsTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_centerVertical="true"
+                    android:alpha="0.38"
+                    android:gravity="center"
+                    android:paddingLeft="16dp"
+                    android:text="@string/material_icon_password"
+                    android:textColor="@color/black"
+                    android:textSize="24dp"/>
+
+                <EditText
+                    android:id="@+id/repeat_password_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="72dp"
+                    android:layout_marginRight="16dp"
+                    android:hint="@string/repeat_password"
+                    android:inputType="numberPassword"
+                    android:singleLine="true"
+                    android:textColorHint="@color/black_54_percent"/>
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <com.crossover.medicapp.custom_views.progress_bars.ProgressWheel
+            android:id="@+id/loading_pw"
+            style="@style/ProgressBarStyle.Main"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            app:circleColor="@android:color/transparent"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

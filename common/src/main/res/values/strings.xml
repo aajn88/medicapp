@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Common</string>
+
+    <!-- Roles -->
+    <string name="admin">Administrator</string>
+    <string name="doctor">Doctor</string>
+</resources>

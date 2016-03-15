@@ -124,7 +124,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="45dp"
                                 android:layout_weight="50"
-                                android:inputType="textPassword"
+                                android:inputType="numberPassword"
                                 android:singleLine="true"/>
                         </LinearLayout>
                     </TableRow>
@@ -147,6 +147,7 @@
                             android:layout_height="wrap_content">
 
                             <com.crossover.medicapp.custom_views.font.RobotoTextView
+                                android:id="@+id/create_account_btn"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right"

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@drawable/selector_background_empty"
+              android:gravity="center_vertical"
+              android:minHeight="?android:attr/listPreferredItemHeight"
+              android:orientation="horizontal"
+              android:transitionName="@string/transition_body">
+
+    <com.crossover.medicapp.custom_views.font.RobotoTextView
+        android:id="@+id/main_text_rtv"
+        style="@style/CaptionStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_weight="1"
+        android:alpha="0.87"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:transitionName="@string/transition_text"/>
+
+</LinearLayout>
