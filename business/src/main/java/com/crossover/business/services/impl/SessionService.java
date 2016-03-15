@@ -26,7 +26,8 @@ public class SessionService implements ISessionService {
     private User mCurrentUser;
 
     /**
-     * This method checks if the given username is available, that means, that there is no user with
+     * This method checks if the given username is available, that means, that there is no user
+     * with
      * this username
      *
      * @param username
@@ -69,6 +70,8 @@ public class SessionService implements ISessionService {
         Validate.isTrue(newUser.getPassword().length() >= 6,
                 "The password length cannot be lesser than 6");
 
+        newUser.setUsername(newUser.getUsername().toLowerCase().trim());
+
         if (!checkAvailableUsername(newUser.getUsername())) {
             return false;
         }
@@ -82,7 +85,8 @@ public class SessionService implements ISessionService {
     }
 
     /**
-     * This method returns the current User in session. If there is an active user (user who decided
+     * This method returns the current User in session. If there is an active user (user who
+     * decided
      * to remember its password) then this user is returned. If there is no active user, then
      * returns null.
      *
@@ -94,5 +98,53 @@ public class SessionService implements ISessionService {
             mCurrentUser = mUsersManager.findActiveUser();
         }
         return mCurrentUser;
+    }
+
+    /**
+     * This method does the log in process given a username and a password
+     *
+     * @param username
+     *         The username
+     * @param password
+     *         The password
+     * @param keepSession
+     *         Keep session?
+     *
+     * @return True if login process has been successful. False if the login fails due to incorrect
+     * username and/or password
+     */
+    @Override
+    public boolean login(String username, String password, boolean keepSession) {
+        Validate.notNull(username, "The username cannot be null");
+        Validate.notNull(password, "The password cannot be null");
+
+        if (username.length() == 0 || password.length() == 0) {
+            return false;
+        }
+
+        User user =
+                mUsersManager.findByUsernameAndPassword(username, CodedUtils.buildMd5(password));
+        if (user != null) {
+            clearActiveSessions();
+            activateSession(user, keepSession);
+            return true;
+        }
+
+        return false;
+    }
+
+    private void activateSession(User user, boolean keepSession) {
+        mCurrentUser = user;
+        if (keepSession) {
+            mCurrentUser.setActive(true);
+            mUsersManager.createOrUpdate(mCurrentUser);
+        }
+    }
+
+    /**
+     * This method clears all active session (in order to keep a clean session)
+     */
+    private void clearActiveSessions() {
+        mUsersManager.deactiveUsers();
     }
 }

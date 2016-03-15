@@ -31,6 +31,7 @@
         android:gravity="center">
 
         <LinearLayout
+            android:id="@+id/container_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -50,7 +51,8 @@
                     android:id="@+id/imageView"
                     android:layout_width="125dp"
                     android:layout_height="125dp"
-                    android:src="@drawable/ic_medicapp"/>
+                    android:src="@drawable/ic_medicapp"
+                    android:transitionName="@string/transition_body"/>
             </LinearLayout>
 
             <LinearLayout
@@ -179,6 +181,8 @@
         </LinearLayout>
 
     </ScrollView>
+
+    <include layout="@layout/progress_wheel_std" />
 
     <LinearLayout
         android:id="@+id/footer_ll"

@@ -20,10 +20,27 @@ public interface IUsersManager extends ICrudManager<User, Integer> {
     User findByUsername(String username);
 
     /**
+     * This method finds a user by its username and password (hash)
+     *
+     * @param username
+     *         The username
+     * @param password
+     *         The password (hash)
+     *
+     * @return The user if exists a match. Otherwise returns null
+     */
+    User findByUsernameAndPassword(String username, String password);
+
+    /**
      * This method finds the active user
      *
      * @return The current active user. Otherwise returns null
      */
     User findActiveUser();
+
+    /**
+     * This method inactives all stored users
+     */
+    void deactiveUsers();
 
 }

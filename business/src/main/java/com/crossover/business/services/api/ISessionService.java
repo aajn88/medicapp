@@ -11,7 +11,8 @@ import com.crossover.common.model.common.User;
 public interface ISessionService {
 
     /**
-     * This method checks if the given username is available, that means, that there is no user with
+     * This method checks if the given username is available, that means, that there is no user
+     * with
      * this username
      *
      * @param username
@@ -43,12 +44,28 @@ public interface ISessionService {
     boolean createAccount(User newUser) throws IllegalArgumentException;
 
     /**
-     * This method returns the current User in session. If there is an active user (user who decided
+     * This method returns the current User in session. If there is an active user (user who
+     * decided
      * to remember its password) then this user is returned. If there is no active user, then
      * returns null.
      *
      * @return The active User. Otherwise returns null
      */
     User getCurrentSession();
+
+    /**
+     * This method does the log in process given a username and a password
+     *
+     * @param username
+     *         The username
+     * @param password
+     *         The password
+     * @param keepSession
+     *         Keep session?
+     *
+     * @return True if login process has been successful. False if the login fails due to incorrect
+     * username and/or password
+     */
+    boolean login(String username, String password, boolean keepSession);
 
 }

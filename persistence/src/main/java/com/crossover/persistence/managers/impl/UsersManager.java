@@ -12,7 +12,8 @@ import com.google.inject.Singleton;
 import java.sql.SQLException;
 
 /**
- * This is the implementation of the {@link IUsersManager} interface where users manager methods are
+ * This is the implementation of the {@link IUsersManager} interface where users manager methods
+ * are
  * exposed
  *
  * @author <a href="mailto:aajn88@gmail.com">Antonio Jimenez</a>
@@ -54,8 +55,34 @@ public class UsersManager extends CrudManager<User, Integer> implements IUsersMa
                     .queryForFirst();
         } catch (SQLException e) {
             Log.e(TAG_LOG, StringUtils
-                            .format("An error occurred while finding a user by its username %s",
-                                    username), e);
+                    .format("An error occurred while finding a user by its username %s",
+                            username), e);
+        }
+
+        return user;
+    }
+
+    /**
+     * This method finds a user by its username and password (hash)
+     *
+     * @param username
+     *         The username
+     * @param password
+     *         The password (hash)
+     *
+     * @return The user if exists a match. Otherwise returns null
+     */
+    @Override
+    public User findByUsernameAndPassword(String username, String password) {
+        User user = null;
+
+        try {
+            user = getDao().queryBuilder().where().eq(User.USERNAME_COLUMN, username).and()
+                    .eq(User.PASSWORD_COLUMN, password).queryForFirst();
+        } catch (SQLException e) {
+            Log.e(TAG_LOG, StringUtils.format(
+                    "An error occurred while finding a user by its username and password %s",
+                    username), e);
         }
 
         return user;
@@ -77,6 +104,19 @@ public class UsersManager extends CrudManager<User, Integer> implements IUsersMa
         }
 
         return user;
+    }
+
+    /**
+     * This method inactives all stored users
+     */
+    @Override
+    public void deactiveUsers() {
+        try {
+            getDao().updateBuilder().updateColumnValue(User.ACTIVE_COLUMN, false).where()
+                    .eq(User.ACTIVE_COLUMN, true).query();
+        } catch (SQLException e) {
+            Log.e(TAG_LOG, "An error occurred while deactivating all users", e);
+        }
     }
 
 }

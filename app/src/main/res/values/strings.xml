@@ -2,9 +2,10 @@
 
     <!-- Medicapp Generics -->
     <string name="app_name">Medicapp</string>
-    <string name="keep_login">Keep me log in</string>
+    <string name="keep_login">Keep session</string>
     <string name="login">Log in</string>
     <string name="connection_error">A connection error has occurred</string>
+    <string name="required_field">This field is required</string>
 
     <!-- Create Account -->
     <string name="create_account">Create account</string>
@@ -18,6 +19,10 @@
     <string name="error_password">Please, write a password with at least 6 letters</string>
     <string name="error_passwords_not_match">The passwords do not match</string>
     <string name="account_created">The account was created</string>
+
+    <!-- Login -->
+    <string name="welcome_user" formatted="false">Welcome %s!</string>
+    <string name="incorrect_username_password">Incorrect username/password</string>
 
     <!-- Transitions Strings -->
     <string name="transition_body">transition_body</string>

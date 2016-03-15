@@ -11,7 +11,10 @@ import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
 
+import com.crossover.business.services.api.ISessionService;
+import com.crossover.common.model.common.User;
 import com.crossover.medicapp.R;
+import com.google.inject.Inject;
 
 import roboguice.RoboGuice;
 import roboguice.activity.RoboActionBarActivity;
@@ -32,6 +35,10 @@ public class MainActivity extends RoboActionBarActivity {
     /** Delay for the splash view **/
     private static final int SPLASH_DELAY = 2500;
 
+    /** Session Service **/
+    @Inject
+    private ISessionService mSessionService;
+
     static {
         RoboGuice.setUseAnnotationDatabases(false);
     }
@@ -49,7 +56,7 @@ public class MainActivity extends RoboActionBarActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                goLogin();
+                redirectActivity();
             }
         }, SPLASH_DELAY);
 
@@ -57,6 +64,26 @@ public class MainActivity extends RoboActionBarActivity {
 
     /**
      * This method redirects to HomeActivity in the properly manner
+     */
+    private void redirectActivity() {
+        User user = mSessionService.getCurrentSession();
+        if (user != null) {
+            goHome();
+        } else {
+            goLogin();
+        }
+    }
+
+    /**
+     * This method redirects to the Home activity if an active session exists
+     */
+    private void goHome() {
+        Intent homeIntent = new Intent(this, HomeActivity.class);
+        startActivity(homeIntent);
+    }
+
+    /**
+     * This method redirects to the Login if there is no stored user
      */
     private void goLogin() {
         Intent homeIntent = new Intent(this, LoginActivity.class);
