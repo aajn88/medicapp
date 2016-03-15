@@ -3,7 +3,9 @@ package com.crossover.medicapp.controllers;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -31,7 +33,8 @@ import roboguice.inject.InjectView;
  * @author <a href="mailto:aajn88@gmail.com">Antonio A. Jimenez N.</a>
  */
 @ContentView(R.layout.activity_login)
-public class LoginActivity extends RoboActionBarActivity implements View.OnClickListener {
+public class LoginActivity extends RoboActionBarActivity implements View.OnClickListener,
+        TextView.OnEditorActionListener {
 
     /** Main container LinearLayout **/
     @InjectView(R.id.container_ll)
@@ -79,6 +82,8 @@ public class LoginActivity extends RoboActionBarActivity implements View.OnClick
 
         mLoginBtn.setOnClickListener(this);
         mCreateAccountBtn.setOnClickListener(this);
+
+        mPasswordEt.setOnEditorActionListener(this);
     }
 
     /**
@@ -152,6 +157,32 @@ public class LoginActivity extends RoboActionBarActivity implements View.OnClick
     }
 
     /**
+     * Called when an action is being performed.
+     *
+     * @param v
+     *         The view that was clicked.
+     * @param actionId
+     *         Identifier of the action.  This will be either the
+     *         identifier you supplied, or {@link EditorInfo#IME_NULL
+     *         EditorInfo.IME_NULL} if being called due to the enter key
+     *         being pressed.
+     * @param event
+     *         If triggered by an enter key, this is the event;
+     *         otherwise, this is null.
+     *
+     * @return Return true if you have consumed the action, else false.
+     */
+    @Override
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        if (actionId == EditorInfo.IME_ACTION_GO) {
+            ViewUtils.hideKeyboard(LoginActivity.this);
+            mLoginBtn.performClick();
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * This AsyncTask does the login connection
      */
     private class LoginAsyncTask extends AsyncTask<Void, Void, Boolean> {
@@ -188,7 +219,6 @@ public class LoginActivity extends RoboActionBarActivity implements View.OnClick
         @Override
         protected void onPostExecute(Boolean success) {
             super.onPostExecute(success);
-            enableLoading(false);
 
             String message;
             int color;
@@ -207,6 +237,8 @@ public class LoginActivity extends RoboActionBarActivity implements View.OnClick
 
             ViewUtils.makeToast(LoginActivity.this, message, SuperToast.Duration.EXTRA_LONG, color)
                     .show();
+            
+            enableLoading(false);
         }
     }
 

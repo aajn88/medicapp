@@ -8,6 +8,7 @@ import com.crossover.persistence.DatabaseHelper;
 import com.crossover.persistence.managers.api.IUsersManager;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.j256.ormlite.stmt.UpdateBuilder;
 
 import java.sql.SQLException;
 
@@ -112,8 +113,10 @@ public class UsersManager extends CrudManager<User, Integer> implements IUsersMa
     @Override
     public void deactiveUsers() {
         try {
-            getDao().updateBuilder().updateColumnValue(User.ACTIVE_COLUMN, false).where()
-                    .eq(User.ACTIVE_COLUMN, true).query();
+            UpdateBuilder ub = getDao().updateBuilder();
+            ub.where().eq(User.ACTIVE_COLUMN, true);
+            ub.updateColumnValue(User.ACTIVE_COLUMN, false);
+            ub.update();
         } catch (SQLException e) {
             Log.e(TAG_LOG, "An error occurred while deactivating all users", e);
         }

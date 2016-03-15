@@ -1,8 +1,11 @@
 package com.crossover.medicapp.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 
 import com.github.johnpersano.supertoasts.SuperToast;
@@ -91,6 +94,22 @@ public class ViewUtils {
     public static SuperToast makeToast(Context context, String text, int duration, int color) {
         return SuperToast.create(context, text, duration,
                 Style.getStyle(color, SuperToast.Animations.FLYIN));
+    }
+
+    /**
+     * This method hides the keyboard
+     *
+     * @param activity
+     *         Active activity
+     */
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager inputManager =
+                (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        View view = activity.getCurrentFocus();
+        if (view != null) {
+            inputManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(),
+                    InputMethodManager.HIDE_NOT_ALWAYS);
+        }
     }
 
 }

@@ -126,6 +126,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="45dp"
                                 android:layout_weight="50"
+                                android:imeOptions="actionGo"
                                 android:inputType="numberPassword"
                                 android:singleLine="true"/>
                         </LinearLayout>
@@ -182,7 +183,7 @@
 
     </ScrollView>
 
-    <include layout="@layout/progress_wheel_std" />
+    <include layout="@layout/progress_wheel_std"/>
 
     <LinearLayout
         android:id="@+id/footer_ll"
