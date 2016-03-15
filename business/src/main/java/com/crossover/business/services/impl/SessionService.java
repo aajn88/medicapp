@@ -133,6 +133,18 @@ public class SessionService implements ISessionService {
         return false;
     }
 
+    /**
+     * This method logs the user out.
+     *
+     * @return True if the user was succesffuly logged out. Otherwise returns False
+     */
+    @Override
+    public boolean logout() {
+        mCurrentUser = null;
+        clearActiveSessions();
+        return true;
+    }
+
     private void activateSession(User user, boolean keepSession) {
         mCurrentUser = user;
         if (keepSession) {

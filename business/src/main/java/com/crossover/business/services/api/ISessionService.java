@@ -68,4 +68,11 @@ public interface ISessionService {
      */
     boolean login(String username, String password, boolean keepSession);
 
+    /**
+     * This method logs the user out.
+     *
+     * @return True if the user was succesffuly logged out. Otherwise returns False
+     */
+    boolean logout();
+
 }
