@@ -1,6 +1,7 @@
 package com.crossover.medicapp.controllers.calendar;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,25 +14,29 @@ import android.view.ViewGroup;
 
 import com.crossover.business.services.api.ICalendarService;
 import com.crossover.common.model.common.Event;
+import com.crossover.common.model.constants.Role;
 import com.crossover.medicapp.R;
+import com.crossover.medicapp.controllers.common.BaseFragment;
 import com.google.inject.Inject;
 import com.roomorama.caldroid.CaldroidFragment;
 
 import java.util.Calendar;
 import java.util.List;
 
-import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
 
 /**
  * A simple {@link Fragment} subclass. Use the {@link MainCalendarFragment#newInstance} factory
  * method to create an instance of this fragment.
  */
-public class MainCalendarFragment extends RoboFragment
+public class MainCalendarFragment extends BaseFragment
         implements EventCalendarFragment.ICalendarEventsListener, View.OnClickListener {
 
     /** Caldroid Calendar Saved State **/
     private static final String CALDROID_SAVED_STATE = "CALDROID_SAVED_STATE";
+
+    /** Create Event Request Code **/
+    private static final int CREATE_EVENT_CODE = 1;
 
     /** Calendar Fragment **/
     private CaldroidFragment mCalendarFragment;
@@ -73,8 +78,28 @@ public class MainCalendarFragment extends RoboFragment
 
         init(savedInstanceState);
         mAddEventFab.setOnClickListener(this);
+
     }
 
+    /**
+     * This method is called to set up features based on the given role
+     *
+     * @param role
+     *         The user's role
+     */
+    @Override
+    protected void setUpFeaturesByRole(Role role) {
+        if (Role.ADMIN != role) {
+            mAddEventFab.setVisibility(View.GONE);
+        }
+    }
+
+    /**
+     * This method initializes the Caldroid Calendar
+     *
+     * @param savedInstanceState
+     *         Saved instances
+     */
     private void init(Bundle savedInstanceState) {
         mCalendarFragment = EventCalendarFragment.newInstance(this);
 
@@ -156,6 +181,16 @@ public class MainCalendarFragment extends RoboFragment
         // I developed this method in case someone in the future could need it
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == CREATE_EVENT_CODE && resultCode == Activity.RESULT_OK) {
+            // Refresh the calendar
+            init(null);
+        }
+    }
+
     /**
      * Called when a view has been clicked.
      *
@@ -167,7 +202,7 @@ public class MainCalendarFragment extends RoboFragment
         switch (v.getId()) {
             case R.id.add_event_fab:
                 Intent createIntent = new Intent(getActivity(), CreateEventActivity.class);
-                startActivity(createIntent);
+                startActivityForResult(createIntent, CREATE_EVENT_CODE);
                 break;
         }
     }

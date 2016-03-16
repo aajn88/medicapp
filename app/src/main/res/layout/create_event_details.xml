@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:showIn="@layout/activity_create_event">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.crossover.medicapp.custom_views.font.MaterialDesignIconsTextView
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:alpha="0.38"
+            android:gravity="center"
+            android:paddingLeft="16dp"
+            android:text="@string/material_icon_clock"
+            android:textColor="@color/black"
+            android:textSize="24dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="72dp"
+            android:paddingRight="16dp">
+
+            <com.crossover.medicapp.custom_views.font.RobotoTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:alpha="0.54"
+                android:gravity="center"
+                android:text="@string/event_date"
+                android:textSize="14sp"
+                app:typeface="robotoRegular"/>
+
+            <com.crossover.medicapp.custom_views.common.MaterialRippleLayout
+                style="@style/RippleStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <com.crossover.medicapp.custom_views.font.RobotoTextView
+                    android:id="@+id/event_date_rtv"
+                    style="@style/ButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="0dp"
+                    android:alpha="0.87"
+                    android:background="@drawable/text_lines"
+                    android:clickable="false"
+                    android:text="Tue., 19 Jan 2016"/>
+            </com.crossover.medicapp.custom_views.common.MaterialRippleLayout>
+
+            <com.crossover.medicapp.custom_views.common.MaterialRippleLayout
+                style="@style/RippleStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <com.crossover.medicapp.custom_views.font.RobotoTextView
+                    android:id="@+id/event_time_rtv"
+                    style="@style/ButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="0dp"
+                    android:alpha="0.87"
+                    android:background="@drawable/text_lines"
+                    android:clickable="false"
+                    android:text="09:30 AM"/>
+            </com.crossover.medicapp.custom_views.common.MaterialRippleLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.crossover.medicapp.custom_views.font.MaterialDesignIconsTextView
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:alpha="0.38"
+            android:gravity="center"
+            android:paddingLeft="16dp"
+            android:text="@string/material_icon_account_multiple"
+            android:textColor="@color/black"
+            android:textSize="24dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="72dp"
+            android:paddingRight="16dp"
+            android:paddingTop="8dp">
+
+            <AutoCompleteTextView
+                android:id="@+id/add_attendant_actv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/add_attendant"
+                android:singleLine="true"/>
+
+            <com.crossover.medicapp.custom_views.chips_table.ChipsTable
+                android:id="@+id/attendants_ct"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="8dp"/>
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

@@ -4,6 +4,7 @@
     <color name="white">#ffffff</color>
     <color name="white_15_percent">#26ffffff</color>
     <color name="white_30_percent">#4Dffffff</color>
+    <color name="white_50_percent">#80ffffff</color>
     <color name="white_70_percent">#B3ffffff</color>
 
     <color name="black">#000000</color>

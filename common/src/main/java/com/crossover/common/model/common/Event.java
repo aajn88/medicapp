@@ -29,7 +29,7 @@ public class Event implements Serializable {
     private Date startDate;
 
     /** Event end date **/
-    @DatabaseField(canBeNull = false, dataType = DataType.DATE_LONG)
+    @DatabaseField(dataType = DataType.DATE_LONG)
     private Date endDate;
 
     /** Attendants Users Ids **/

@@ -6,6 +6,8 @@ import com.crossover.persistence.managers.api.IUsersManager;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+import java.util.List;
+
 /**
  * The implementation of the interface {@link IUserService} for users management
  *
@@ -29,6 +31,16 @@ public class UserService implements IUserService {
     @Override
     public User findUserById(int id) {
         return mUsersManager.findById(id);
+    }
+
+    /**
+     * This method returns the list of all available users
+     *
+     * @return List of users
+     */
+    @Override
+    public List<User> getAllUsers() {
+        return mUsersManager.all();
     }
 
 }

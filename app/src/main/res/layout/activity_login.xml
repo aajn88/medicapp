@@ -16,18 +16,10 @@
         android:orientation="vertical">
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/card_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/banner_ll"
-        android:background="#15000000"
-        android:orientation="vertical"/>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/card_container"
+        android:layout_below="@id/banner_ll"
         android:gravity="center">
 
         <LinearLayout

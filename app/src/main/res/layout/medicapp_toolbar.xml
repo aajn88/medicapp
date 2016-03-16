@@ -41,7 +41,7 @@
         android:layout_gravity="right">
 
         <com.crossover.medicapp.custom_views.font.MaterialDesignIconsTextView
-            android:id="@+id/snd_action_btn"
+            android:id="@+id/snd_action_mditv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:alpha="0.87"

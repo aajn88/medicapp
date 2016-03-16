@@ -6,6 +6,8 @@ import com.crossover.persistence.managers.api.IEventsManager;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+import org.apache.commons.lang3.Validate;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -51,6 +53,24 @@ public class CalendarService implements ICalendarService {
         Date endDate = cal.getTime();
 
         return mEventsManager.findBetweenDates(startDate, endDate);
+    }
+
+    /**
+     * This method creates an event
+     *
+     * @param event
+     *         The event to be created
+     *
+     * @return True if it was successfully created. Otherwise returns False
+     */
+    @Override
+    public boolean createEvent(Event event) {
+        Validate.notNull(event, "The event cannot be null");
+        Validate.notNull(event.getName(), "The event name cannot be null");
+        Validate.isTrue(event.getName().trim().length() != 0, "The event name cannot be empty");
+        Validate.notNull(event.getStartDate(), "The start date cannot be null");
+
+        return mEventsManager.createOrUpdate(event);
     }
 
 }

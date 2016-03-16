@@ -44,4 +44,10 @@
     <string name="future_event">Future event</string>
     <string name="past_event">Past event</string>
 
+    <!-- Create Event -->
+    <string name="event_title">Event title</string>
+    <string name="event_date">Event date</string>
+    <string name="add_attendant">Add attendant</string>
+    <string name="event_succesffuly_created">Event successfully created</string>
+
 </resources>

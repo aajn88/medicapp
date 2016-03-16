@@ -34,7 +34,7 @@ public class CreateAccountActivity extends RoboActionBarActivity implements View
     private TextView mFstActionBtn;
 
     /** Second Action Button **/
-    @InjectView(R.id.snd_action_btn)
+    @InjectView(R.id.snd_action_mditv)
     private TextView mSndActionBtn;
 
     /** Create Account LinearLayout **/

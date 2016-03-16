@@ -1,18 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.crossover.medicapp.controllers.calendar.CreateEventActivity">
 
-    <include
-        layout="@layout/medicapp_toolbar"/>
-
     <RelativeLayout
+        android:id="@+id/toolbar_rl"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="128dp"
+        android:background="@color/colorPrimary"
+        android:transitionName="@string/transition_toolbar">
 
+        <com.crossover.medicapp.custom_views.font.MaterialDesignIconsTextView
+            android:id="@+id/close_mditv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="16dp"
+            android:text="@string/material_icon_arrow_left"
+            android:textColor="@color/white"
+            android:textSize="24dp"/>
+
+        <EditText
+            android:id="@+id/event_title_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="72dp"
+            android:layout_marginRight="16dp"
+            android:hint="@string/event_title"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white_50_percent"
+            android:textSize="34sp"
+            android:theme="@style/EditTextDarkTheme"/>
+
+        <com.crossover.medicapp.custom_views.font.MaterialDesignIconsTextView
+            android:id="@+id/save_mditv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="16dp"
+            android:text="@string/material_icon_check"
+            android:textColor="@color/white"
+            android:textSize="24dp"/>
     </RelativeLayout>
 
-</RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <include
+            layout="@layout/create_event_details"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="fill"/>
+    </ScrollView>
+
+</LinearLayout>

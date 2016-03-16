@@ -1,12 +1,17 @@
 package com.crossover.common.model.utils;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.crossover.common.R;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * This is the date utils
@@ -15,8 +20,14 @@ import java.util.Date;
  */
 public final class DateUtils {
 
-    /** Empty String */
-    private static final String EMPTY_STRING = "";
+    /** Tag for logs **/
+    private static final String TAG_LOG = DateUtils.class.getName();
+
+    /** Date format with the day of the week */
+    public static final String FORMAT_WITH_DAY_OF_WEEK = "EEE, dd MMM yyyy";
+
+    /** Time format with AM and PM */
+    public static final String FORMAT_TIME_AM_PM = "hh:mm a";
 
     /** Private constructor to avoid instances **/
     private DateUtils() {}
@@ -65,14 +76,41 @@ public final class DateUtils {
         return cal.getTime();
     }
 
-    public static String formatDateDefaultLocale(Context context, Date fecha, String formato) {
-        if (fecha == null || formato == null) {
-            return EMPTY_STRING;
+    /**
+     * This method formats a given date based on a format and the default locale
+     *
+     * @param context
+     *         App context
+     * @param date
+     *         Date to be converted
+     * @param format
+     *         The target format
+     *
+     * @return The formatted date
+     */
+    @NonNull
+    public static String formatDateDefaultLocale(Context context, Date date, String format) {
+        if (date == null || format == null) {
+            return StringUtils.EMPTY_STRING;
         }
-        SimpleDateFormat sdf = new SimpleDateFormat(formato, MedicappUtils.getLocale(context));
-        return sdf.format(fecha);
+        SimpleDateFormat sdf = new SimpleDateFormat(format, MedicappUtils.getLocale(context));
+        return sdf.format(date);
     }
 
+    /**
+     * This method formats a given date based on a format and the default locale. When the day is
+     * "today", "yesterdar" or "tomorrow", then this words are shown respectively.
+     *
+     * @param context
+     *         App context
+     * @param date
+     *         Date to be formatted
+     * @param format
+     *         target format
+     *
+     * @return Formatted Date
+     */
+    @NonNull
     public static String formatSpecialDate(Context context, Date date, String format) {
         String message;
 
@@ -104,12 +142,61 @@ public final class DateUtils {
         return message;
     }
 
+    /**
+     * This method formatts a date using no locale
+     *
+     * @param date
+     *         Date to be formatted
+     * @param format
+     *         Date format
+     *
+     * @return Formatted date
+     */
     public static String formatDate(Date date, String format) {
         if (date == null || format == null) {
-            return EMPTY_STRING;
+            return StringUtils.EMPTY_STRING;
         }
         SimpleDateFormat sdf = new SimpleDateFormat(format);
         return sdf.format(date);
+    }
+
+    /**
+     * This method parsers a date string to a date given the format and the default locale
+     *
+     * @param context
+     *         App context
+     * @param dateStr
+     *         Date String
+     * @param format
+     *         String Date format
+     *
+     * @return The date, if an error occurred, then null is returned
+     */
+    public static Date parseDateDefaultLocale(Context context, String dateStr, String format) {
+        return parseDate(MedicappUtils.getLocale(context), dateStr, format);
+    }
+
+    /**
+     * This method parsers a date string to a date given the format and the locale
+     *
+     * @param locale
+     *         Locale
+     * @param dateStr
+     *         Date String
+     * @param format
+     *         String Date format
+     *
+     * @return The date, if an error occurred, then null is returned
+     */
+    public static Date parseDate(Locale locale, String dateStr, String format) {
+        DateFormat formatter = new SimpleDateFormat(format, locale);
+        try {
+            return formatter.parse(dateStr);
+        } catch (ParseException e) {
+            Log.e(TAG_LOG, StringUtils
+                    .format("An error occurred while parsing a date to [format = %s]", format), e);
+            return null;
+        }
     }
 
 }

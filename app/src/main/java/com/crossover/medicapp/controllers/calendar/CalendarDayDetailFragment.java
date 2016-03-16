@@ -17,9 +17,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.crossover.common.model.common.Event;
+import com.crossover.common.model.constants.Role;
 import com.crossover.common.model.utils.DateUtils;
-import com.crossover.medicapp.R;
 import com.crossover.common.model.utils.MedicappUtils;
+import com.crossover.medicapp.R;
+import com.crossover.medicapp.controllers.common.BaseFragment;
 
 import org.apache.commons.lang3.text.WordUtils;
 
@@ -32,14 +34,14 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
 
 /**
- * A simple {@link Fragment} subclass. Use the {@link CalendarDayDetailFragment#newInstance} factory
+ * A simple {@link Fragment} subclass. Use the {@link CalendarDayDetailFragment#newInstance}
+ * factory
  * method to create an instance of this fragment.
  */
-public class CalendarDayDetailFragment extends RoboFragment {
+public class CalendarDayDetailFragment extends BaseFragment {
 
     /** The event key **/
     public static final String EVENT = "EVENT";
@@ -146,6 +148,17 @@ public class CalendarDayDetailFragment extends RoboFragment {
         dayOfWeek = WordUtils.capitalizeFully(dayOfWeek);
         mDayOfWeekRtv.setText(dayOfWeek);
 
+    }
+
+    /**
+     * This method is called to hide features based on the given role
+     *
+     * @param role
+     *         The user's role
+     */
+    @Override
+    protected void setUpFeaturesByRole(Role role) {
+        // Nothing to set up
     }
 
     /**

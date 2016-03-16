@@ -25,4 +25,14 @@ public interface ICalendarService {
      */
     List<Event> getDayEvents(int year, int month, int day);
 
+    /**
+     * This method creates an event
+     *
+     * @param event
+     *         The event to be created
+     *
+     * @return True if it was successfully created. Otherwise returns False
+     */
+    boolean createEvent(Event event);
+
 }

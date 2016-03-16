@@ -11,6 +11,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.crossover.business.services.api.ISessionService;
 import com.crossover.medicapp.R;
@@ -29,6 +31,14 @@ import roboguice.inject.InjectView;
 @ContentView(R.layout.activity_home)
 public class HomeActivity extends RoboActionBarActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    /** Fst action btn **/
+    @InjectView(R.id.fst_action_mditv)
+    protected TextView mFstActionBtn;
+
+    /** Snd action btn **/
+    @InjectView(R.id.snd_action_mditv)
+    protected TextView mSndActionBtn;
 
     /** Drawer Layout **/
     @InjectView(R.id.drawer_layout)
@@ -52,6 +62,9 @@ public class HomeActivity extends RoboActionBarActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mFstActionBtn.setVisibility(View.GONE);
+        mSndActionBtn.setVisibility(View.GONE);
 
         initDrawer();
     }

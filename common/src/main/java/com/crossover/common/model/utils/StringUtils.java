@@ -7,6 +7,10 @@ package com.crossover.common.model.utils;
  */
 public final class StringUtils {
 
+    /** Empty String **/
+    public static final String EMPTY_STRING = "";
+
+    /** String null **/
     private static final String STRING_NULL = "null";
 
     /** Private constructor to avoid instanes **/
