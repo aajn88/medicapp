@@ -1,8 +1,12 @@
 package com.crossover.medicapp.controllers.calendar;
 
 
+import android.app.ActivityOptions;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +19,7 @@ import android.widget.TextView;
 import com.crossover.common.model.common.Event;
 import com.crossover.common.model.utils.DateUtils;
 import com.crossover.medicapp.R;
-import com.crossover.medicapp.utils.MedicappUtils;
+import com.crossover.common.model.utils.MedicappUtils;
 
 import org.apache.commons.lang3.text.WordUtils;
 
@@ -223,16 +227,16 @@ public class CalendarDayDetailFragment extends RoboFragment {
         }
 
         private void showDetail(Event event, View view) {
-            //            Intent eventDetailIntent = new Intent(getContext(), EventDetailActivity.class);
-            //            eventDetailIntent.putExtra(EVENT, event);
-            //            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            //                ActivityOptions options = ActivityOptions
-            //                        .makeSceneTransitionAnimation(getActivity(), view,
-            //                                getString(R.string.transition_event_toolbar));
-            //                ActivityCompat.startActivity(getActivity(), eventDetailIntent, options.toBundle());
-            //            } else {
-            //                startActivity(eventDetailIntent);
-            //            }
+            Intent eventDetailIntent = new Intent(getContext(), EventDetailActivity.class);
+            eventDetailIntent.putExtra(EVENT, event);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                ActivityOptions options = ActivityOptions
+                        .makeSceneTransitionAnimation(getActivity(), view,
+                                getString(R.string.transition_toolbar));
+                ActivityCompat.startActivity(getActivity(), eventDetailIntent, options.toBundle());
+            } else {
+                startActivity(eventDetailIntent);
+            }
         }
 
         class ViewHolder {

@@ -8,7 +8,7 @@
     android:layout_marginBottom="2dp"
     android:background="@drawable/blue_event"
     android:orientation="vertical"
-    android:transitionName="@string/transition_event_toolbar">
+    android:transitionName="@string/transition_toolbar">
 
     <com.crossover.medicapp.custom_views.font.RobotoTextView
         android:id="@+id/event_text_rtv"

@@ -4,4 +4,10 @@
     <!-- Roles -->
     <string name="admin">Administrator</string>
     <string name="doctor">Doctor</string>
+
+    <!-- Generics -->
+    <string name="today">Today</string>
+    <string name="yesterday">Yesterday</string>
+    <string name="tomorrow">Tomorrow</string>
+    
 </resources>

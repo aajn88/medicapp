@@ -4,6 +4,7 @@ import com.crossover.business.services.api.ICalendarService;
 import com.crossover.common.model.common.Event;
 import com.crossover.persistence.managers.api.IEventsManager;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -14,6 +15,7 @@ import java.util.List;
  *
  * @author <a href="mailto:aajn88@gmail.com">Antonio Jimenez</a>
  */
+@Singleton
 public class CalendarService implements ICalendarService {
 
     /** Events manager **/

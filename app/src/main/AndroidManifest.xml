@@ -26,6 +26,8 @@
         </activity>
         <activity android:name=".controllers.HomeActivity">
         </activity>
+        <activity android:name=".controllers.calendar.EventDetailActivity">
+        </activity>
     </application>
 
 </manifest>

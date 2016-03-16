@@ -1,0 +1,169 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".controllers.calendar.EventDetailActivity">
+
+    <RelativeLayout
+        android:id="@+id/event_toolbar_rl"
+        android:layout_width="match_parent"
+        android:layout_height="128dp"
+        android:background="@color/material_blue_500"
+        android:transitionName="@string/transition_toolbar">
+
+        <com.crossover.medicapp.custom_views.font.MaterialDesignIconsTextView
+            android:id="@+id/close_mditv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="@android:color/transparent"
+            android:padding="16dp"
+            android:text="@string/material_icon_close"
+            android:textColor="@color/white"
+            android:textSize="24dp"/>
+
+        <com.crossover.medicapp.custom_views.font.RobotoTextView
+            android:id="@+id/event_title_rtv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="72dp"
+            android:text="Event title"
+            android:textColor="@color/white"
+            android:textSize="34sp"
+            app:typeface="robotoRegular"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/event_toolbar_rl"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingTop="8dp">
+
+        <RelativeLayout
+            android:id="@+id/event_time_rl"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:gravity="center_vertical">
+
+            <com.crossover.medicapp.custom_views.font.MaterialDesignIconsTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.54"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/material_icon_clock"
+                android:textColor="@color/black"
+                android:textSize="24dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="72dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <com.crossover.medicapp.custom_views.font.RobotoTextView
+                    android:id="@+id/date_rtv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Today"
+                    android:textSize="20sp"
+                    app:typeface="robotoMedium"/>
+
+                <com.crossover.medicapp.custom_views.font.RobotoTextView
+                    android:id="@+id/date_caption_rtv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mar., 16 2016"
+                    android:textSize="16sp"
+                    app:typeface="robotoRegular"/>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:gravity="center_vertical">
+
+            <com.crossover.medicapp.custom_views.font.MaterialDesignIconsTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:alpha="0.54"
+                android:padding="8dp"
+                android:text="@string/material_icon_calendar"
+                android:textColor="@color/black"
+                android:textSize="24dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="72dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <com.crossover.medicapp.custom_views.font.RobotoTextView
+                    android:id="@+id/event_state_rtv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:text="Scheduled"
+                    android:textSize="20sp"
+                    app:typeface="robotoMedium"/>
+
+                <com.crossover.medicapp.custom_views.font.RobotoTextView
+                    android:id="@+id/state_caption_rtv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Future event"
+                    android:textSize="16sp"
+                    app:typeface="robotoRegular"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/attendants_rl"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:gravity="center_vertical">
+
+            <com.crossover.medicapp.custom_views.font.MaterialDesignIconsTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:alpha="0.54"
+                android:padding="8dp"
+                android:text="@string/material_icon_account_multiple"
+                android:textSize="24dp"/>
+
+            <com.crossover.medicapp.custom_views.font.RobotoTextView
+                android:id="@+id/attendant_rtv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="72dp"
+                android:layout_marginRight="16dp"
+                android:paddingTop="8dp"
+                android:text="Attendants"
+                android:textSize="20sp"
+                app:typeface="robotoMedium"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

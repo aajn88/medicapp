@@ -1,4 +1,4 @@
-package com.crossover.medicapp.utils;
+package com.crossover.common.model.utils;
 
 import android.content.Context;
 import android.os.Build;

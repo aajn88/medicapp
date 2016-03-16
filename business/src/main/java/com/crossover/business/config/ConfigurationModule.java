@@ -2,8 +2,10 @@ package com.crossover.business.config;
 
 import com.crossover.business.services.api.ICalendarService;
 import com.crossover.business.services.api.ISessionService;
+import com.crossover.business.services.api.IUserService;
 import com.crossover.business.services.impl.CalendarService;
 import com.crossover.business.services.impl.SessionService;
+import com.crossover.business.services.impl.UserService;
 import com.crossover.persistence.managers.api.IEventsManager;
 import com.crossover.persistence.managers.api.IUsersManager;
 import com.crossover.persistence.managers.impl.EventsManager;
@@ -30,6 +32,7 @@ public class ConfigurationModule extends AbstractModule {
     private void bindServices() {
         bind(ISessionService.class).to(SessionService.class);
         bind(ICalendarService.class).to(CalendarService.class);
+        bind(IUserService.class).to(UserService.class);
     }
 
     /**

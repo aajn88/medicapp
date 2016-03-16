@@ -30,12 +30,18 @@
     <string name="transition_body">transition_body</string>
     <string name="transition_text">transition_text</string>
     <string name="transition_event">transition_event</string>
-    <string name="transition_event_toolbar">transition_event_toolbar</string>
+    <string name="transition_toolbar">transition_toolbar</string>
 
     <!-- Home Activity -->
     <string name="home_menu">Home</string>
     <string name="calendar_menu">My calendar</string>
     <string name="settings">Settings</string>
     <string name="log_out">Log out</string>
+
+    <!-- Calendar Strings -->
+    <string name="scheduled">Scheduled</string>
+    <string name="completed">Completed</string>
+    <string name="future_event">Future event</string>
+    <string name="past_event">Past event</string>
 
 </resources>

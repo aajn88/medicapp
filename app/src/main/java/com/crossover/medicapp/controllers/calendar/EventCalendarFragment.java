@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import com.crossover.common.model.common.Event;
 import com.crossover.medicapp.R;
-import com.crossover.medicapp.utils.MedicappUtils;
+import com.crossover.common.model.utils.MedicappUtils;
 import com.crossover.medicapp.utils.ViewUtils;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidGridAdapter;
