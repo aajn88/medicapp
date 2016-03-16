@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/background_ll"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="2dp"
+    android:background="@drawable/blue_event"
+    android:orientation="vertical">
+
+    <com.crossover.medicapp.custom_views.font.RobotoTextView
+        android:id="@+id/event_text_rtv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:singleLine="true"
+        android:text="Sample text"
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        app:typeface="robotoRegular"/>
+
+</LinearLayout>

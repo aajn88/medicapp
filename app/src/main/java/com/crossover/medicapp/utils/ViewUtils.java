@@ -2,8 +2,10 @@ package com.crossover.medicapp.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
@@ -70,9 +72,8 @@ public class ViewUtils {
      * @return SuperToast instance
      */
     @NonNull
-    public static SuperToast makeToast(Context context,
-                                       @StringRes
-                                       int resId, int duration, int color) {
+    public static SuperToast makeToast(Context context, @StringRes int resId, int duration,
+                                       int color) {
         return makeToast(context, context.getString(resId), duration, color);
     }
 
@@ -103,13 +104,29 @@ public class ViewUtils {
      *         Active activity
      */
     public static void hideKeyboard(Activity activity) {
-        InputMethodManager inputManager =
-                (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager inputManager = (InputMethodManager) activity
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
         View view = activity.getCurrentFocus();
         if (view != null) {
             inputManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(),
                     InputMethodManager.HIDE_NOT_ALWAYS);
         }
+    }
+
+    /**
+     * This method converts dp to pixels
+     *
+     * @param dp
+     *         Oiringla dp
+     * @param context
+     *         App context
+     *
+     * @return Dp value in pixels
+     */
+    public static int dp2Pixels(int dp, Context context) {
+        Resources r = context.getResources();
+        return (int) TypedValue
+                .applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics());
     }
 
 }

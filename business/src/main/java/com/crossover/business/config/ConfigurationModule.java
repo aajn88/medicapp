@@ -1,8 +1,12 @@
 package com.crossover.business.config;
 
+import com.crossover.business.services.api.ICalendarService;
 import com.crossover.business.services.api.ISessionService;
+import com.crossover.business.services.impl.CalendarService;
 import com.crossover.business.services.impl.SessionService;
+import com.crossover.persistence.managers.api.IEventsManager;
 import com.crossover.persistence.managers.api.IUsersManager;
+import com.crossover.persistence.managers.impl.EventsManager;
 import com.crossover.persistence.managers.impl.UsersManager;
 import com.google.inject.AbstractModule;
 
@@ -25,6 +29,7 @@ public class ConfigurationModule extends AbstractModule {
      */
     private void bindServices() {
         bind(ISessionService.class).to(SessionService.class);
+        bind(ICalendarService.class).to(CalendarService.class);
     }
 
     /**
@@ -32,6 +37,7 @@ public class ConfigurationModule extends AbstractModule {
      */
     private void bindManagers() {
         bind(IUsersManager.class).to(UsersManager.class);
+        bind(IEventsManager.class).to(EventsManager.class);
     }
 
 }

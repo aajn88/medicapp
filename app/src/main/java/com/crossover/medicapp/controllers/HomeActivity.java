@@ -14,6 +14,7 @@ import android.view.MenuItem;
 
 import com.crossover.business.services.api.ISessionService;
 import com.crossover.medicapp.R;
+import com.crossover.medicapp.controllers.calendar.MainCalendarFragment;
 import com.google.inject.Inject;
 
 import roboguice.activity.RoboActionBarActivity;
@@ -67,9 +68,8 @@ public class HomeActivity extends RoboActionBarActivity
         mNavigationView.inflateMenu(R.menu.menu_admin);
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 
-        mDrawerToggle =
-                new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.drawer_open,
-                        R.string.drawer_close);
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar,
+                R.string.drawer_open, R.string.drawer_close);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
         mNavigationView.setNavigationItemSelectedListener(this);
@@ -91,6 +91,9 @@ public class HomeActivity extends RoboActionBarActivity
         Fragment fragment = null;
         switch (id) {
             case R.id.home_item:
+                break;
+            case R.id.calendar_item:
+                fragment = MainCalendarFragment.newInstance();
                 break;
             case R.id.log_out_item:
                 logOut();
@@ -123,8 +126,11 @@ public class HomeActivity extends RoboActionBarActivity
 
     @Override
     public void onBackPressed() {
+        FragmentManager fm = getSupportFragmentManager();
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawer(GravityCompat.START);
+        } else if (fm.getBackStackEntryCount() != 0) {
+            fm.popBackStack();
         } else {
             finishAffinity();
         }
