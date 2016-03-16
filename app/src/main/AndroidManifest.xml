@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    package="com.crossover.medicapp"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest package="com.crossover.medicapp"
+          xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
         android:allowBackup="true"
@@ -27,6 +26,8 @@
         <activity android:name=".controllers.HomeActivity">
         </activity>
         <activity android:name=".controllers.calendar.EventDetailActivity">
+        </activity>
+        <activity android:name=".controllers.calendar.CreateEventActivity">
         </activity>
     </application>
 

@@ -2,7 +2,9 @@ package com.crossover.medicapp.controllers.calendar;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -19,19 +21,24 @@ import java.util.Calendar;
 import java.util.List;
 
 import roboguice.fragment.RoboFragment;
+import roboguice.inject.InjectView;
 
 /**
  * A simple {@link Fragment} subclass. Use the {@link MainCalendarFragment#newInstance} factory
  * method to create an instance of this fragment.
  */
 public class MainCalendarFragment extends RoboFragment
-        implements EventCalendarFragment.ICalendarEventsListener {
+        implements EventCalendarFragment.ICalendarEventsListener, View.OnClickListener {
 
     /** Caldroid Calendar Saved State **/
     private static final String CALDROID_SAVED_STATE = "CALDROID_SAVED_STATE";
 
     /** Calendar Fragment **/
     private CaldroidFragment mCalendarFragment;
+
+    /** Floating Action Button **/
+    @InjectView(R.id.add_event_fab)
+    private FloatingActionButton mAddEventFab;
 
     /** Calendar Service **/
     @Inject
@@ -65,6 +72,7 @@ public class MainCalendarFragment extends RoboFragment
         super.onViewCreated(view, savedInstanceState);
 
         init(savedInstanceState);
+        mAddEventFab.setOnClickListener(this);
     }
 
     private void init(Bundle savedInstanceState) {
@@ -146,5 +154,21 @@ public class MainCalendarFragment extends RoboFragment
     @Override
     public void onChangeMonth(int month, int year) {
         // I developed this method in case someone in the future could need it
+    }
+
+    /**
+     * Called when a view has been clicked.
+     *
+     * @param v
+     *         The view that was clicked.
+     */
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.add_event_fab:
+                Intent createIntent = new Intent(getActivity(), CreateEventActivity.class);
+                startActivity(createIntent);
+                break;
+        }
     }
 }
