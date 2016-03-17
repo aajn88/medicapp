@@ -1,13 +1,18 @@
 package com.crossover.business.services.impl;
 
 import com.crossover.business.services.api.ICalendarService;
+import com.crossover.business.services.api.ISessionService;
 import com.crossover.common.model.common.Event;
+import com.crossover.common.model.common.Invitation;
+import com.crossover.common.model.common.User;
 import com.crossover.persistence.managers.api.IEventsManager;
+import com.crossover.persistence.managers.api.IInvitationsManager;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 import org.apache.commons.lang3.Validate;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -23,6 +28,14 @@ public class CalendarService implements ICalendarService {
     /** Events manager **/
     @Inject
     private IEventsManager mEventsManager;
+
+    /** Invitations manager **/
+    @Inject
+    private IInvitationsManager mInvitationsManager;
+
+    /** ISession service **/
+    @Inject
+    private ISessionService mSessionService;
 
     /**
      * This method retrieves the month events
@@ -84,6 +97,23 @@ public class CalendarService implements ICalendarService {
     @Override
     public Event findEventById(int eventId) {
         return mEventsManager.findById(eventId);
+    }
+
+    /**
+     * This method gets the user's pending invitations
+     *
+     * @return List of pending events to be accepted
+     */
+    @Override
+    public List<Event> getPendingInvitations() {
+        User currentUser = mSessionService.getCurrentSession();
+        List<Invitation> invitations = mInvitationsManager
+                .findByUserIdAndAccepted(currentUser.getId(), false);
+        List<Event> events = new ArrayList<>(invitations.size());
+        for (Invitation invitation : invitations) {
+            events.add(invitation.getEvent());
+        }
+        return events;
     }
 
 }

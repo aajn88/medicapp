@@ -45,4 +45,11 @@ public interface ICalendarService {
      */
     Event findEventById(int eventId);
 
+    /**
+     * This method gets the user's pending invitations
+     *
+     * @return List of pending events to be accepted
+     */
+    List<Event> getPendingInvitations();
+
 }
