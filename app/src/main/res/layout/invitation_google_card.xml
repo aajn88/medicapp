@@ -51,7 +51,7 @@
 
         <com.crossover.medicapp.custom_views.font.RobotoTextView
             android:id="@+id/am_pm_rtv"
-            style="@style/Display1Style"
+            style="@style/HeadlineStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/time_rtv"

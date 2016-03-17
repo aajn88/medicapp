@@ -35,4 +35,14 @@ public interface IInvitationsManager extends ICrudManager<Invitation, Integer> {
      */
     Invitation findByEventIdAndUserId(int eventId, int userId);
 
+    /**
+     * This method finds all the invitations of an eventId
+     *
+     * @param eventId
+     *         Event Id
+     *
+     * @return List of invitations related to this event
+     */
+    List<Invitation> findByEventId(int eventId);
+
 }

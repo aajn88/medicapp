@@ -18,20 +18,37 @@ public class Invitation {
     /** Accepted **/
     public static final String ACCEPTED_COLUMN = "accepted";
 
+    /** Default constructor **/
+    public Invitation() {
+    }
+
+    /**
+     * Constructor for user and event id
+     *
+     * @param userId
+     *         User Id
+     * @param eventId
+     *         Event Id
+     */
+    public Invitation(Integer userId, Integer eventId) {
+        this.userId = userId;
+        this.eventId = eventId;
+    }
+
     /** Invitation id **/
     @DatabaseField(generatedId = true)
     private Integer id;
 
-    /** User **/
-    @DatabaseField(foreign = true, foreignAutoRefresh = true)
-    private User user;
+    /** User Id **/
+    @DatabaseField(canBeNull = false, columnName = USER_ID_COLUMN)
+    private Integer userId;
 
     /** Event **/
-    @DatabaseField(foreign = true, foreignAutoRefresh = true)
-    private Event event;
+    @DatabaseField(canBeNull = false, columnName = EVENT_ID_COLUMN)
+    private Integer eventId;
 
     /** Accepted **/
-    @DatabaseField(canBeNull = false)
+    @DatabaseField(canBeNull = false, columnName = ACCEPTED_COLUMN)
     private boolean accepted;
 
     /**
@@ -42,38 +59,41 @@ public class Invitation {
     }
 
     /**
-     * @return id the id to set
+     * @param id
+     *         the id to set
      */
     public void setId(Integer id) {
         this.id = id;
     }
 
     /**
-     * @return the user
+     * @return the userId
      */
-    public User getUser() {
-        return user;
+    public Integer getUserId() {
+        return userId;
     }
 
     /**
-     * @return user the user to set
+     * @param userId
+     *         the userId to set
      */
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     /**
-     * @return the event
+     * @return the eventId
      */
-    public Event getEvent() {
-        return event;
+    public Integer getEventId() {
+        return eventId;
     }
 
     /**
-     * @return event the event to set
+     * @param eventId
+     *         the eventId to set
      */
-    public void setEvent(Event event) {
-        this.event = event;
+    public void setEventId(Integer eventId) {
+        this.eventId = eventId;
     }
 
     /**
@@ -84,7 +104,8 @@ public class Invitation {
     }
 
     /**
-     * @return accepted the accepted to set
+     * @param accepted
+     *         the accepted to set
      */
     public void setAccepted(boolean accepted) {
         this.accepted = accepted;

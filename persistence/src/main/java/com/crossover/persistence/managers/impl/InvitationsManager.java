@@ -85,4 +85,26 @@ public class InvitationsManager extends CrudManager<Invitation, Integer>
 
         return invitation;
     }
+
+    /**
+     * This method finds all the invitations of an eventId
+     *
+     * @param eventId
+     *         Event Id
+     *
+     * @return List of invitations related to this event
+     */
+    @Override
+    public List<Invitation> findByEventId(int eventId) {
+        List<Invitation> invitations = null;
+
+        try {
+            invitations =
+                    getDao().queryBuilder().where().eq(Invitation.EVENT_ID_COLUMN, eventId).query();
+        } catch (SQLException e) {
+            Log.e(TAG_LOG, "An error occurred while finding the invitations of an event", e);
+        }
+
+        return invitations;
+    }
 }

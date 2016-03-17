@@ -161,6 +161,10 @@ public class InvitationsFragment extends BaseFragment {
             for (int position : reverseSortedPositions) {
                 mInvitationsAdapter.remove(mInvitationsAdapter.getItem(position));
             }
+
+            if (mInvitationsAdapter.getCount() == 0) {
+                mNoInvitationsRtv.setVisibility(View.VISIBLE);
+            }
         }
     }
 }

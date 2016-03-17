@@ -88,7 +88,7 @@ public class InvitationsCardsAdapter extends ArrayAdapter<Event> {
             convertView = mInflater.inflate(R.layout.invitation_google_card, parent, false);
             holder = new Holder();
 
-            holder.title = (TextView) convertView.findViewById(R.id.event_time_rtv);
+            holder.title = (TextView) convertView.findViewById(R.id.event_title_rtv);
             holder.time = (TextView) convertView.findViewById(R.id.time_rtv);
             holder.amPm = (TextView) convertView.findViewById(R.id.am_pm_rtv);
             holder.date = (TextView) convertView.findViewById(R.id.date_rtv);

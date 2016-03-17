@@ -7,7 +7,12 @@
     <com.nhaarman.listviewanimations.itemmanipulation.DynamicListView
         android:id="@+id/invitations_dlv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:divider="@android:color/transparent"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:paddingTop="8dp"
+        android:scrollbarStyle="outsideInset"/>
 
     <com.crossover.medicapp.custom_views.font.RobotoTextView
         android:id="@+id/no_invitations_rtv"

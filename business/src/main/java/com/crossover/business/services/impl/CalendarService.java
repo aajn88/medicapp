@@ -15,7 +15,9 @@ import org.apache.commons.lang3.Validate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * The implementation of the exposed services in {@link ICalendarService}
@@ -83,7 +85,29 @@ public class CalendarService implements ICalendarService {
         Validate.isTrue(event.getName().trim().length() != 0, "The event name cannot be empty");
         Validate.notNull(event.getStartDate(), "The start date cannot be null");
 
-        return mEventsManager.createOrUpdate(event);
+        boolean created = mEventsManager.createOrUpdate(event);
+        if (!created || event.getAttendantsIds() == null) {
+            return created;
+        }
+
+        Set<Integer> invitations = new HashSet<Integer>();
+        for (Integer userId : event.getAttendantsIds()) {
+            Invitation invitation =
+                    mInvitationsManager.findByEventIdAndUserId(event.getId(), userId);
+            if (invitation == null) {
+                mInvitationsManager.createOrUpdate(new Invitation(userId, event.getId()));
+            }
+            invitations.add(userId);
+        }
+
+        List<Invitation> allInvitations = mInvitationsManager.findByEventId(event.getId());
+        for (Invitation invitation : allInvitations) {
+            if (!invitations.contains(invitation.getUserId())) {
+                mInvitationsManager.deleteById(invitation.getId());
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -111,7 +135,7 @@ public class CalendarService implements ICalendarService {
                 .findByUserIdAndAccepted(currentUser.getId(), false);
         List<Event> events = new ArrayList<>(invitations.size());
         for (Invitation invitation : invitations) {
-            events.add(invitation.getEvent());
+            events.add(mEventsManager.findById(invitation.getEventId()));
         }
         return events;
     }
@@ -133,7 +157,7 @@ public class CalendarService implements ICalendarService {
             return false;
         }
 
-        if(accept) {
+        if (accept) {
             invitation.setAccepted(true);
             return mInvitationsManager.createOrUpdate(invitation);
         }
