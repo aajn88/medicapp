@@ -8,17 +8,19 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/google_cards_background_top"
         android:orientation="vertical"
-        android:background="@drawable/google_cards_background_bottom">
+        android:paddingBottom="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="24dp">
 
         <com.crossover.medicapp.custom_views.font.RobotoTextView
+            android:id="@+id/event_title_rtv"
             style="@style/HeadlineStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:alpha="0.87"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="24dp"
             android:text="Event title"/>
 
         <com.crossover.medicapp.custom_views.font.RobotoTextView
@@ -26,10 +28,134 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:alpha="0.54"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:text="Subtitle"/>
+            android:paddingTop="12dp"
+            android:text="@string/you_ve_invited"/>
 
     </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp">
+
+        <com.crossover.medicapp.custom_views.font.RobotoTextView
+            android:id="@+id/time_rtv"
+            style="@style/Display4Style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0.54"
+            android:text="09:00"/>
+
+        <com.crossover.medicapp.custom_views.font.RobotoTextView
+            android:id="@+id/am_pm_rtv"
+            style="@style/Display1Style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/time_rtv"
+            android:alpha="0.54"
+            android:paddingTop="16dp"
+            android:text="AM"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp">
+
+        <com.crossover.medicapp.custom_views.font.MaterialDesignIconsTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0.54"
+            android:text="@string/material_icon_clock"
+            android:textSize="24dp"/>
+
+        <com.crossover.medicapp.custom_views.font.RobotoTextView
+            android:id="@+id/date_rtv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="24dp"
+            android:text="Tue., 17 Mar 2016"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp">
+
+        <com.crossover.medicapp.custom_views.font.MaterialDesignIconsTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0.54"
+            android:text="@string/material_icon_account_multiple"
+            android:textSize="24dp"/>
+
+        <com.crossover.medicapp.custom_views.font.RobotoTextView
+            android:id="@+id/attendants_rtv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="24dp"
+            android:text="Attendant 1\nAttendant 2\nAttendant 3\n...\n"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:alpha="0.12"
+        android:background="@color/black"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/google_cards_background_bottom"
+        android:orientation="horizontal">
+
+        <com.crossover.medicapp.custom_views.common.MaterialRippleLayout
+            android:id="@+id/reject_mrl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="center"
+            android:padding="16dp">
+
+            <com.crossover.medicapp.custom_views.font.RobotoTextView
+                android:id="@+id/reject_rtv"
+                style="@style/ButtonTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:alpha="0.54"
+                android:text="@string/reject"
+                android:textColor="@color/colorAccent"/>
+
+        </com.crossover.medicapp.custom_views.common.MaterialRippleLayout>
+
+        <com.crossover.medicapp.custom_views.common.MaterialRippleLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/reject_mrl"
+            android:padding="16dp">
+
+            <com.crossover.medicapp.custom_views.font.RobotoTextView
+                android:id="@+id/accept_rtv"
+                style="@style/ButtonTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:alpha="0.54"
+                android:text="@string/accept"
+                android:textColor="@color/colorAccent"/>
+
+        </com.crossover.medicapp.custom_views.common.MaterialRippleLayout>
+
+    </RelativeLayout>
 
 </LinearLayout>
