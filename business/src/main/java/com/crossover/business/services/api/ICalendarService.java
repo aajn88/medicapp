@@ -35,4 +35,14 @@ public interface ICalendarService {
      */
     boolean createEvent(Event event);
 
+    /**
+     * This method finds an event by its Id
+     *
+     * @param eventId
+     *         The event Id
+     *
+     * @return The requested event. Null if it does not exist
+     */
+    Event findEventById(int eventId);
+
 }

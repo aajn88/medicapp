@@ -12,16 +12,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.crossover.business.services.api.ICalendarService;
 import com.crossover.common.model.common.Event;
 import com.crossover.common.model.constants.Role;
 import com.crossover.common.model.utils.DateUtils;
 import com.crossover.common.model.utils.MedicappUtils;
 import com.crossover.medicapp.R;
 import com.crossover.medicapp.controllers.common.BaseFragment;
+import com.google.inject.Inject;
 
 import org.apache.commons.lang3.text.WordUtils;
 
@@ -37,8 +40,7 @@ import java.util.Map;
 import roboguice.inject.InjectView;
 
 /**
- * A simple {@link Fragment} subclass. Use the {@link CalendarDayDetailFragment#newInstance}
- * factory
+ * A simple {@link Fragment} subclass. Use the {@link CalendarDayDetailFragment#newInstance} factory
  * method to create an instance of this fragment.
  */
 public class CalendarDayDetailFragment extends BaseFragment {
@@ -49,9 +51,11 @@ public class CalendarDayDetailFragment extends BaseFragment {
     /** Date format to be shown **/
     private static final String TIME_FORMAT = "HH:mm";
 
+    /** Code request of the detail **/
+    private static final int DETAIL_REQUEST_CODE = 1;
+
     /** Day hours **/
     private static List<Integer> mHours;
-
     /** Time formatter **/
     private static SimpleDateFormat formatter = new SimpleDateFormat(TIME_FORMAT);
 
@@ -65,7 +69,9 @@ public class CalendarDayDetailFragment extends BaseFragment {
 
     /** Events per hour **/
     private final Map<Integer, List<Event>> mEventsPerHour = new HashMap<>();
-
+    /** Calendar service **/
+    @Inject
+    private ICalendarService mCalendarService;
     /** Hours ListView **/
     @InjectView(R.id.hours_lv)
     private ListView mHoursLv;
@@ -150,6 +156,12 @@ public class CalendarDayDetailFragment extends BaseFragment {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        invalidateData();
+    }
+
     /**
      * This method is called to hide features based on the given role
      *
@@ -157,8 +169,36 @@ public class CalendarDayDetailFragment extends BaseFragment {
      *         The user's role
      */
     @Override
-    protected void setUpFeaturesByRole(Role role) {
+    public void setUpFeaturesByRole(Role role) {
         // Nothing to set up
+    }
+
+    /**
+     * This method invalidates the data and refresh the ListView
+     */
+    private void invalidateData() {
+        if (mEvents != null) {
+            for (Event event : mEvents) {
+                Event dbEvent = mCalendarService.findEventById(event.getId());
+                copyEvents(dbEvent, event);
+            }
+            ((BaseAdapter) mHoursLv.getAdapter()).notifyDataSetInvalidated();
+        }
+    }
+
+    /**
+     * This method copies the event information to another
+     *
+     * @param origin
+     *         Origin event
+     * @param target
+     *         Target event
+     */
+    private void copyEvents(Event origin, Event target) {
+        target.setName(origin.getName());
+        target.setStartDate(origin.getStartDate());
+        target.setEndDate(origin.getEndDate());
+        target.setAttendantsIds(origin.getAttendantsIds());
     }
 
     /**
@@ -246,9 +286,10 @@ public class CalendarDayDetailFragment extends BaseFragment {
                 ActivityOptions options = ActivityOptions
                         .makeSceneTransitionAnimation(getActivity(), view,
                                 getString(R.string.transition_toolbar));
-                ActivityCompat.startActivity(getActivity(), eventDetailIntent, options.toBundle());
+                ActivityCompat.startActivityForResult(getActivity(), eventDetailIntent,
+                        DETAIL_REQUEST_CODE, options.toBundle());
             } else {
-                startActivity(eventDetailIntent);
+                startActivityForResult(eventDetailIntent, DETAIL_REQUEST_CODE);
             }
         }
 

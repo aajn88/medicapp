@@ -14,6 +14,7 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 
 import com.crossover.common.model.utils.DateUtils;
+import com.crossover.medicapp.custom_views.progress_bars.ProgressWheel;
 import com.github.johnpersano.supertoasts.SuperToast;
 import com.github.johnpersano.supertoasts.util.Style;
 import com.nhaarman.listviewanimations.appearance.AnimationAdapter;
@@ -199,6 +200,28 @@ public class ViewUtils {
             datePicker.setMaxDate(maxDate.getTimeInMillis());
         }
         return dpDialog;
+    }
+
+    /**
+     * This method enables/disables the progress wheel
+     *
+     * @param pw
+     *         The progress wheel
+     * @param enable
+     *         Enable/Disable
+     */
+    public static void enableProgressWheel(ProgressWheel pw, boolean enable) {
+        if(pw == null) {
+            return;
+        }
+        pw.setVisibility(enable ? View.VISIBLE : View.INVISIBLE);
+        if(pw.isSpinning()) {
+            pw.stopSpinning();
+        }
+
+        if(enable) {
+            pw.spin();
+        }
     }
 
 }

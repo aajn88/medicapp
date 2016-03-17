@@ -42,6 +42,9 @@ import roboguice.inject.InjectView;
 @ContentView(R.layout.activity_create_event)
 public class CreateEventActivity extends RoboActionBarActivity implements View.OnClickListener {
 
+    /** Edit event **/
+    public static final String EDIT_EVENT = "EDIT_EVENT";
+
     /** Add attendant **/
     @InjectView(R.id.add_attendant_actv)
     private AutoCompleteTextView mAddAttendantActv;
@@ -93,6 +96,9 @@ public class CreateEventActivity extends RoboActionBarActivity implements View.O
     /** The selected attendants for the event **/
     private Set<User> mSelectedUsers = new HashSet<>();
 
+    /** Edit Event **/
+    private Event mEditEvent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,20 +107,55 @@ public class CreateEventActivity extends RoboActionBarActivity implements View.O
 
         ViewCompat.setElevation(mToolbarRl, getResources().getDimension(R.dimen.toolbar_elevation));
 
+        mEditEvent = (Event) getIntent().getSerializableExtra(EDIT_EVENT);
+        if (mEditEvent != null) {
+            loadEditEvent();
+        } else {
+            loadNewEvent();
+        }
+
+        mSaveBtn.setOnClickListener(this);
+        mEventDateRtv.setOnClickListener(this);
+        mEventTimeRtv.setOnClickListener(this);
+    }
+
+    /**
+     * This methid loads a new Event
+     */
+    private void loadNewEvent() {
         // Event creator is set as an attendant by default
         mSelectedUsers.add(mSessionService.getCurrentSession());
 
         loadAttendants();
 
-        mSaveBtn.setOnClickListener(this);
+        loadEventDate(new Date());
+    }
 
-        mEventDateRtv.setOnClickListener(this);
-        String date = DateUtils.formatDateDefaultLocale(this, new Date(),
-                DateUtils.FORMAT_WITH_DAY_OF_WEEK);
-        mEventDateRtv.setText(WordUtils.capitalizeFully(date.toLowerCase()));
-        mEventTimeRtv.setText(DateUtils.formatDate(new Date(), DateUtils.FORMAT_TIME_AM_PM));
+    /**
+     * This method loads the event date given a date
+     *
+     * @param date
+     *         Date to be shown
+     */
+    private void loadEventDate(Date date) {
+        String dateStr = DateUtils
+                .formatDateDefaultLocale(this, date, DateUtils.FORMAT_WITH_DAY_OF_WEEK);
+        mEventDateRtv.setText(WordUtils.capitalizeFully(dateStr.toLowerCase()));
+        mEventTimeRtv.setText(DateUtils.formatDate(date, DateUtils.FORMAT_TIME_AM_PM));
+    }
 
-        mEventTimeRtv.setOnClickListener(this);
+    /**
+     * This method loads the event to be edited
+     */
+    private void loadEditEvent() {
+        for (Integer id : mEditEvent.getAttendantsIds()) {
+            mSelectedUsers.add(mUserService.findUserById(id));
+        }
+
+        mEventTitleEt.setText(mEditEvent.getName());
+        loadEventDate(mEditEvent.getStartDate());
+
+        loadAttendants();
     }
 
     /**
@@ -122,13 +163,12 @@ public class CreateEventActivity extends RoboActionBarActivity implements View.O
      */
     private void loadAttendants() {
         List<User> usersList = new ArrayList<>(mSelectedUsers);
-        ChipsTableAdapter<User> adapter =
-                new ChipsTableAdapter<User>(this, R.layout.deletable_chip_layout, usersList);
+        ChipsTableAdapter<User> adapter = new ChipsTableAdapter<User>(this,
+                R.layout.deletable_chip_layout, usersList);
         mAttendantsCt.setAdapter(adapter);
 
-        final ArrayAdapter<User> autoAdapter =
-                new ArrayAdapter<User>(this, R.layout.support_simple_spinner_dropdown_item,
-                        mUserService.getAllUsers());
+        final ArrayAdapter<User> autoAdapter = new ArrayAdapter<User>(this,
+                R.layout.support_simple_spinner_dropdown_item, mUserService.getAllUsers());
         mAddAttendantActv.setAdapter(autoAdapter);
         mAddAttendantActv.setThreshold(1);
         mAddAttendantActv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -159,7 +199,6 @@ public class CreateEventActivity extends RoboActionBarActivity implements View.O
     private void saveEvent() {
         Event event = buildEvent();
         if (validateFields(event)) {
-            // TODO: Save event
             mCalendarService.createEvent(event);
             ViewUtils.makeToast(this, R.string.event_succesffuly_created, SuperToast.Duration.LONG,
                     Style.BLUE).show();
@@ -174,7 +213,7 @@ public class CreateEventActivity extends RoboActionBarActivity implements View.O
      * @return The resulting event
      */
     private Event buildEvent() {
-        Event event = new Event();
+        Event event = mEditEvent != null ? mEditEvent : new Event();
 
         event.setName(mEventTitleEt.getText().toString());
 

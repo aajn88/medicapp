@@ -88,7 +88,7 @@ public class MainCalendarFragment extends BaseFragment
      *         The user's role
      */
     @Override
-    protected void setUpFeaturesByRole(Role role) {
+    public void setUpFeaturesByRole(Role role) {
         if (Role.ADMIN != role) {
             mAddEventFab.setVisibility(View.GONE);
         }

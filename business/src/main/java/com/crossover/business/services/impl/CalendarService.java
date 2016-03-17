@@ -73,4 +73,17 @@ public class CalendarService implements ICalendarService {
         return mEventsManager.createOrUpdate(event);
     }
 
+    /**
+     * This method finds an event by its Id
+     *
+     * @param eventId
+     *         The event Id
+     *
+     * @return The requested event. Null if it does not exist
+     */
+    @Override
+    public Event findEventById(int eventId) {
+        return mEventsManager.findById(eventId);
+    }
+
 }

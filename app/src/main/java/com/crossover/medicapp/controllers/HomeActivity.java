@@ -115,7 +115,8 @@ public class HomeActivity extends RoboActionBarActivity
 
         if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.main_content_rl, fragment).commit();
+            fragmentManager.beginTransaction().replace(R.id.main_content_rl, fragment)
+                    .addToBackStack(null).commit();
         }
 
         mDrawerLayout.closeDrawer(GravityCompat.START);
