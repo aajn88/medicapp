@@ -51,8 +51,9 @@
     <string name="event_succesffuly_created">Event successfully created</string>
 
     <!-- Invitations -->
-    <string name="you_ve_invited">You've been invited</string>
+    <string name="you_ve_invited">You\'ve been invited</string>
     <string name="reject">Reject</string>
     <string name="accept">Accept</string>
+    <string name="woohoo_no_invitations">Woohoo! No pending invitations!</string>
 
 </resources>

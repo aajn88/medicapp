@@ -1,12 +1,23 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="com.crossover.medicapp.controllers.invitations.InvitationsFragment">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="com.crossover.medicapp.controllers.invitations.InvitationsFragment">
 
     <com.nhaarman.listviewanimations.itemmanipulation.DynamicListView
-        android:id="@+id/invitations_lv"
+        android:id="@+id/invitations_dlv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-</FrameLayout>
+    <com.crossover.medicapp.custom_views.font.RobotoTextView
+        android:id="@+id/no_invitations_rtv"
+        style="@style/SubheadingStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/woohoo_no_invitations"
+        android:textColor="@color/colorAccent"/>
+
+    <include layout="@layout/progress_wheel_std"/>
+
+</RelativeLayout>

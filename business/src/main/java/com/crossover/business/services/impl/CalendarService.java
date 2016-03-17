@@ -116,4 +116,41 @@ public class CalendarService implements ICalendarService {
         return events;
     }
 
+    /**
+     * This method accepts/rejects an invitation
+     *
+     * @param eventId
+     *         The eventId invitation
+     * @param accept
+     *         Accepts/rejects the invitation
+     */
+    @Override
+    public boolean acceptRejectInvitation(int eventId, boolean accept) {
+        User currentUser = mSessionService.getCurrentSession();
+        Invitation invitation =
+                mInvitationsManager.findByEventIdAndUserId(eventId, currentUser.getId());
+        if (invitation == null) {
+            return false;
+        }
+
+        if(accept) {
+            invitation.setAccepted(true);
+            return mInvitationsManager.createOrUpdate(invitation);
+        }
+
+        mInvitationsManager.deleteById(invitation.getId());
+
+        Event event = mEventsManager.findById(eventId);
+        List<Integer> newAttendants = new ArrayList<>();
+        for (Integer id : event.getAttendantsIds()) {
+            if (!currentUser.getId().equals(id)) {
+                newAttendants.add(id);
+            }
+        }
+
+        Integer[] finalAttnds = new Integer[newAttendants.size()];
+        event.setAttendantsIds(newAttendants.toArray(finalAttnds));
+        return mEventsManager.createOrUpdate(event);
+    }
+
 }

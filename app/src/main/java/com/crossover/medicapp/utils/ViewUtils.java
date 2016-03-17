@@ -35,39 +35,6 @@ import java.util.Date;
 public class ViewUtils {
 
     /**
-     * This method returns an animation for an adapter given the base adapter and a key
-     *
-     * @param key
-     *         Key from 0 to 4 to select an animation
-     * @param adapter
-     *         The base adapter that will take the animation adapter
-     *
-     * @return Animated Adapter
-     */
-    public static AnimationAdapter animateAdapter(int key, BaseAdapter adapter) {
-        AnimationAdapter animAdapter;
-        switch (key) {
-            default:
-            case 0:
-                animAdapter = new AlphaInAnimationAdapter(adapter);
-                break;
-            case 1:
-                animAdapter = new ScaleInAnimationAdapter(adapter);
-                break;
-            case 2:
-                animAdapter = new SwingBottomInAnimationAdapter(adapter);
-                break;
-            case 3:
-                animAdapter = new SwingLeftInAnimationAdapter(adapter);
-                break;
-            case 4:
-                animAdapter = new SwingRightInAnimationAdapter(adapter);
-                break;
-        }
-        return animAdapter;
-    }
-
-    /**
      * This method makes a toast.
      *
      * @param context
@@ -203,25 +170,78 @@ public class ViewUtils {
     }
 
     /**
-     * This method enables/disables the progress wheel
+     * This method enables/disables the progress wheel. All related views will be hide/visible
+     * depending on the progress wheel state
      *
      * @param pw
      *         The progress wheel
      * @param enable
      *         Enable/Disable
+     * @param views
+     *         Related views that will be hide/visible depending on the progress wheel state
      */
-    public static void enableProgressWheel(ProgressWheel pw, boolean enable) {
-        if(pw == null) {
+    public static void enableProgressWheel(ProgressWheel pw, boolean enable, View... views) {
+        if (pw == null) {
             return;
         }
         pw.setVisibility(enable ? View.VISIBLE : View.INVISIBLE);
-        if(pw.isSpinning()) {
+        if (pw.isSpinning()) {
             pw.stopSpinning();
         }
 
-        if(enable) {
+        if (enable) {
             pw.spin();
         }
+
+        for (View view : views) {
+            if (view != null) {
+                view.setVisibility(enable ? View.INVISIBLE : View.VISIBLE);
+            }
+        }
+    }
+
+    /**
+     * This method animates an adapter given a key of the desired animation.
+     * <p>
+     * <p>
+     * 0. Alpha
+     * <p>
+     * 1. Scale
+     * <p>
+     * 2. Swing Bottom
+     * <p>
+     * 3. Swing Left
+     * <p>
+     * 4. Swing Right
+     *
+     * @param key
+     *         Key of the animation
+     * @param adapter
+     *         Adapter to be animated
+     *
+     * @return The ANimationAdapter
+     */
+    public static AnimationAdapter animateAdapter(int key, BaseAdapter adapter) {
+        AnimationAdapter animAdapter;
+        switch (key % 5) {
+            default:
+            case 0:
+                animAdapter = new AlphaInAnimationAdapter(adapter);
+                break;
+            case 1:
+                animAdapter = new ScaleInAnimationAdapter(adapter);
+                break;
+            case 2:
+                animAdapter = new SwingBottomInAnimationAdapter(adapter);
+                break;
+            case 3:
+                animAdapter = new SwingLeftInAnimationAdapter(adapter);
+                break;
+            case 4:
+                animAdapter = new SwingRightInAnimationAdapter(adapter);
+                break;
+        }
+        return animAdapter;
     }
 
 }

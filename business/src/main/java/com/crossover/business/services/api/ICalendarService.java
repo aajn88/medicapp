@@ -52,4 +52,14 @@ public interface ICalendarService {
      */
     List<Event> getPendingInvitations();
 
+    /**
+     * This method accepts/rejects an invitation
+     *
+     * @param eventId
+     *         The eventId invitation
+     * @param accept
+     *         Accepts/rejects the invitation
+     */
+    boolean acceptRejectInvitation(int eventId, boolean accept);
+
 }

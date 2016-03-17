@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.crossover.common.model.common.Event;
+import com.crossover.common.model.common.Invitation;
 import com.crossover.common.model.common.User;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -35,7 +36,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "medicapp.db";
 
     /** DB Version **/
-    private static final int DB_VERSION = 2;
+    private static final int DB_VERSION = 3;
 
     /** The connection source **/
     protected AndroidConnectionSource connectionSource = new AndroidConnectionSource(this);
@@ -115,6 +116,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             // List of tables to be created
             TableUtils.createTable(connectionSource, User.class);
             TableUtils.createTable(connectionSource, Event.class);
+            TableUtils.createTable(connectionSource, Invitation.class);
 
             Log.i(TAG_LOG, "DB successfully created");
         } catch (SQLException e) {
@@ -143,6 +145,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             // Just in this case: Drop all tables and create the DB again
             TableUtils.dropTable(connectionSource, User.class, true);
             TableUtils.dropTable(connectionSource, Event.class, true);
+            TableUtils.dropTable(connectionSource, Invitation.class, true);
 
             onCreate();
         } catch (SQLException e) {

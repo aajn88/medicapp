@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.crossover.business.services.api.ISessionService;
 import com.crossover.medicapp.R;
 import com.crossover.medicapp.controllers.calendar.MainCalendarFragment;
+import com.crossover.medicapp.controllers.invitations.InvitationsFragment;
 import com.google.inject.Inject;
 
 import roboguice.activity.RoboActionBarActivity;
@@ -67,6 +68,10 @@ public class HomeActivity extends RoboActionBarActivity
         mSndActionBtn.setVisibility(View.GONE);
 
         initDrawer();
+
+        MenuItem home = mNavigationView.getMenu().getItem(0);
+        home.setChecked(true);
+        onNavigationItemSelected(home);
     }
 
     /**
@@ -104,6 +109,7 @@ public class HomeActivity extends RoboActionBarActivity
         Fragment fragment = null;
         switch (id) {
             case R.id.home_item:
+                fragment = InvitationsFragment.newInstance();
                 break;
             case R.id.calendar_item:
                 fragment = MainCalendarFragment.newInstance();

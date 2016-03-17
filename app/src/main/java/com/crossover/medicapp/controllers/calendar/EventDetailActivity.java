@@ -224,9 +224,7 @@ public class EventDetailActivity extends BaseActivity implements View.OnClickLis
      * This method enables/disables the progress wheel and its related views
      */
     private void enableLoading(boolean enable) {
-        ViewUtils.enableProgressWheel(mLoadingPw, enable);
-        mMainContentLl.setVisibility(enable ? View.GONE : View.VISIBLE);
-        mEditEventFab.setVisibility(enable ? View.GONE : View.VISIBLE);
+        ViewUtils.enableProgressWheel(mLoadingPw, enable, mMainContentLl, mEditEventFab);
     }
 
     /**
