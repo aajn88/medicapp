@@ -38,7 +38,7 @@ public class SessionService implements ISessionService {
      */
     @Override
     public boolean checkAvailableUsername(String username) {
-        return !(username == null || username.length() < 6) &&
+        return !(username == null || username.length() < 4) &&
                 mUsersManager.findByUsername(username) == null;
     }
 

@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.crossover.business.services.api.ISessionService;
+import com.crossover.common.model.common.User;
 import com.crossover.medicapp.R;
 import com.crossover.medicapp.controllers.calendar.MainCalendarFragment;
 import com.crossover.medicapp.controllers.invitations.InvitationsFragment;
@@ -72,6 +73,14 @@ public class HomeActivity extends RoboActionBarActivity
         MenuItem home = mNavigationView.getMenu().getItem(0);
         home.setChecked(true);
         onNavigationItemSelected(home);
+
+        View headerView = mNavigationView.getHeaderView(0);
+        TextView nameTv = (TextView) headerView.findViewById(R.id.user_name_tv);
+        TextView usernameTv = (TextView) headerView.findViewById(R.id.username_tv);
+
+        User currentUser = mSessionService.getCurrentSession();
+        nameTv.setText(currentUser.getName());
+        usernameTv.setText(currentUser.getUsername());
     }
 
     /**

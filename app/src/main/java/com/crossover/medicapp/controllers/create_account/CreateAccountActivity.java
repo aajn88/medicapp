@@ -168,7 +168,7 @@ public class CreateAccountActivity extends RoboActionBarActivity implements View
             return false;
         }
         if (mPasswordEt.getText().length() < 6) {
-            mPasswordEt.setError(getString(R.string.error_username));
+            mPasswordEt.setError(getString(R.string.error_password));
             return false;
         } else if (!mPasswordEt.getText().toString()
                 .equals(mRepeatPasswordEt.getText().toString())) {
