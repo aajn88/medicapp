@@ -67,7 +67,19 @@ public class CalendarService implements ICalendarService {
 
         Date endDate = cal.getTime();
 
-        return mEventsManager.findBetweenDates(startDate, endDate);
+        User currentUser = mSessionService.getCurrentSession();
+        List<Event> todayEvents = mEventsManager.findBetweenDates(startDate, endDate);
+        List<Event> userEvents = new ArrayList<>();
+
+        for (Event event : todayEvents) {
+            Invitation userInvitation = mInvitationsManager
+                    .findByEventIdAndUserId(event.getId(), currentUser.getId());
+            if (userInvitation != null && userInvitation.isAccepted()) {
+                userEvents.add(event);
+            }
+        }
+
+        return userEvents;
     }
 
     /**
@@ -85,6 +97,8 @@ public class CalendarService implements ICalendarService {
         Validate.isTrue(event.getName().trim().length() != 0, "The event name cannot be empty");
         Validate.notNull(event.getStartDate(), "The start date cannot be null");
 
+        User currentUser = mSessionService.getCurrentSession();
+
         boolean created = mEventsManager.createOrUpdate(event);
         if (!created || event.getAttendantsIds() == null) {
             return created;
@@ -92,10 +106,12 @@ public class CalendarService implements ICalendarService {
 
         Set<Integer> invitations = new HashSet<Integer>();
         for (Integer userId : event.getAttendantsIds()) {
-            Invitation invitation =
-                    mInvitationsManager.findByEventIdAndUserId(event.getId(), userId);
+            Invitation invitation = mInvitationsManager
+                    .findByEventIdAndUserId(event.getId(), userId);
             if (invitation == null) {
-                mInvitationsManager.createOrUpdate(new Invitation(userId, event.getId()));
+                invitation = new Invitation(userId, event.getId());
+                invitation.setAccepted((int) userId == currentUser.getId());
+                mInvitationsManager.createOrUpdate(invitation);
             }
             invitations.add(userId);
         }
@@ -151,8 +167,8 @@ public class CalendarService implements ICalendarService {
     @Override
     public boolean acceptRejectInvitation(int eventId, boolean accept) {
         User currentUser = mSessionService.getCurrentSession();
-        Invitation invitation =
-                mInvitationsManager.findByEventIdAndUserId(eventId, currentUser.getId());
+        Invitation invitation = mInvitationsManager
+                .findByEventIdAndUserId(eventId, currentUser.getId());
         if (invitation == null) {
             return false;
         }

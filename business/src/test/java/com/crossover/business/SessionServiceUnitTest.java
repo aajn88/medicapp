@@ -3,8 +3,8 @@ package com.crossover.business;
 import com.crossover.business.services.api.ISessionService;
 import com.crossover.business.services.impl.SessionService;
 import com.crossover.common.model.common.User;
-import com.crossover.common.model.constants.Role;
 import com.crossover.common.model.utils.CodedUtils;
+import com.crossover.common.model.utils.TestUtils;
 import com.crossover.persistence.managers.api.IUsersManager;
 
 import org.easymock.EasyMock;
@@ -87,7 +87,7 @@ public class SessionServiceUnitTest {
 
     @Test(expected = NullPointerException.class)
     public void createAccountUsernameNullTest() throws Exception {
-        User user = buildUserTest();
+        User user = TestUtils.buildTestUser();
         user.setUsername(null);
         sessionService.createAccount(user);
 
@@ -96,7 +96,7 @@ public class SessionServiceUnitTest {
 
     @Test(expected = NullPointerException.class)
     public void createAccountPasswordNullTest() throws Exception {
-        User user = buildUserTest();
+        User user = TestUtils.buildTestUser();
         user.setPassword(null);
         sessionService.createAccount(user);
 
@@ -105,7 +105,7 @@ public class SessionServiceUnitTest {
 
     @Test(expected = NullPointerException.class)
     public void createAccountNameNullTest() throws Exception {
-        User user = buildUserTest();
+        User user = TestUtils.buildTestUser();
         user.setName(null);
         sessionService.createAccount(user);
 
@@ -114,7 +114,7 @@ public class SessionServiceUnitTest {
 
     @Test(expected = NullPointerException.class)
     public void createAccountRoleNullTest() throws Exception {
-        User user = buildUserTest();
+        User user = TestUtils.buildTestUser();
         user.setRole(null);
         sessionService.createAccount(user);
 
@@ -123,7 +123,7 @@ public class SessionServiceUnitTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void createAccountInvalidPasswordTest() throws Exception {
-        User user = buildUserTest();
+        User user = TestUtils.buildTestUser();
         user.setPassword("123");
         sessionService.createAccount(user);
 
@@ -236,12 +236,4 @@ public class SessionServiceUnitTest {
         EasyMock.verify(usersManagerMock);
     }
 
-    private User buildUserTest() {
-        User user = new User();
-        user.setUsername("username");
-        user.setPassword("password");
-        user.setName("name");
-        user.setRole(Role.ADMIN);
-        return user;
-    }
 }
