@@ -4,6 +4,7 @@ import com.crossover.business.services.api.ISessionService;
 import com.crossover.business.services.impl.SessionService;
 import com.crossover.common.model.common.User;
 import com.crossover.common.model.constants.Role;
+import com.crossover.common.model.utils.CodedUtils;
 import com.crossover.persistence.managers.api.IUsersManager;
 
 import org.easymock.EasyMock;
@@ -16,6 +17,7 @@ import org.robolectric.annotation.Config;
 import java.lang.reflect.Field;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 /**
@@ -126,6 +128,112 @@ public class SessionServiceUnitTest {
         sessionService.createAccount(user);
 
         fail("No exception thrown");
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void loginUsernameNullTest() throws Exception {
+        sessionService.login(null, "password", false);
+
+        fail("No exception thrown");
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void loginPasswordNullTest() throws Exception {
+        sessionService.login("username", null, false);
+
+        fail("No exception thrown");
+    }
+
+    @Test
+    public void loginEmptyUsernamePasswordTest() throws Exception {
+        boolean success = sessionService.login("", "password", false);
+        assertEquals(false, success);
+        success = sessionService.login("username", "", false);
+        assertEquals(false, success);
+        success = sessionService.login("", "", false);
+        assertEquals(false, success);
+    }
+
+    @Test
+    public void loginIncorrectUsernamePasswordTest() throws Exception {
+        EasyMock.reset(usersManagerMock);
+
+        EasyMock.expect(usersManagerMock
+                .findByUsernameAndPassword("username", CodedUtils.buildMd5("password")))
+                .andReturn(null).times(1);
+
+        EasyMock.replay(usersManagerMock);
+
+        boolean success = sessionService.login("username", "password", false);
+
+        assertEquals(success, false);
+        EasyMock.verify(usersManagerMock);
+    }
+
+    @Test
+    public void loginSuccessNoKeepSessionTest() throws Exception {
+        EasyMock.reset(usersManagerMock);
+
+        EasyMock.expect(usersManagerMock
+                .findByUsernameAndPassword("username", CodedUtils.buildMd5("password")))
+                .andReturn(new User()).times(1);
+
+        EasyMock.replay(usersManagerMock);
+
+        boolean success = sessionService.login("username", "password", false);
+
+        assertEquals(success, true);
+        EasyMock.verify(usersManagerMock);
+    }
+
+    @Test
+    public void loginSuccessKeepSessionTest() throws Exception {
+        EasyMock.reset(usersManagerMock);
+
+        EasyMock.expect(usersManagerMock
+                .findByUsernameAndPassword("username", CodedUtils.buildMd5("password")))
+                .andReturn(new User()).times(1);
+
+        EasyMock.expect(usersManagerMock.createOrUpdate(EasyMock.anyObject(User.class)))
+                .andReturn(true).times(1);
+
+        EasyMock.replay(usersManagerMock);
+
+        boolean success = sessionService.login("username", "password", true);
+
+        assertEquals(success, true);
+        EasyMock.verify(usersManagerMock);
+    }
+
+    @Test
+    public void logoutTest() throws Exception {
+        EasyMock.reset(usersManagerMock);
+
+        usersManagerMock.deactiveUsers();
+        EasyMock.expectLastCall().times(1);
+
+        EasyMock.replay(usersManagerMock);
+
+        boolean success = sessionService.logout();
+
+        assertEquals(success, true);
+        EasyMock.verify(usersManagerMock);
+    }
+
+    @Test
+    public void getCurrentSessionTest() throws Exception {
+        EasyMock.reset(usersManagerMock);
+
+        EasyMock.expect(usersManagerMock.findActiveUser()).andReturn(new User()).times(1);
+
+        EasyMock.replay(usersManagerMock);
+
+        User user = sessionService.getCurrentSession();
+        assertNotNull(user);
+        user = sessionService.getCurrentSession();
+        assertNotNull(user);
+
+        EasyMock.verify(usersManagerMock);
     }
 
     private User buildUserTest() {
